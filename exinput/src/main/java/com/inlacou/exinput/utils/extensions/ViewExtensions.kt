@@ -4,23 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 
-fun View?.snackbar(messageResId: Int, length: Int = Snackbar.LENGTH_LONG){
+internal fun View?.snackbar(messageResId: Int, length: Int = Snackbar.LENGTH_LONG){
 	this?.let { this.snackbar(this.context.getString(messageResId), length) }
 }
-fun View?.snackbar(message: String, length: Int = Snackbar.LENGTH_LONG){
-	this?.let { Snackbar.make(it, message, length).show() }
-}
 
-fun View.resizeView(width: Int, height: Int) {
-	val lp = layoutParams
-	if (width > -1) {
-		lp.width = width
-	}
-	if (height > -1) {
-		lp.height = height
-	}
-	layoutParams = lp
-	requestLayout()
+internal fun View?.snackbar(message: String, length: Int = Snackbar.LENGTH_LONG){
+	this?.let { Snackbar.make(it, message, length).show() }
 }
 
 fun View?.setVisible(visible: Boolean, holdSpaceOnDissapear: Boolean = false) {

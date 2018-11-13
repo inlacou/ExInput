@@ -15,56 +15,57 @@ import com.inlacou.exinput.free.text.password.PasswordInput
 import com.inlacou.exinput.free.text.phone.PhoneInput
 import com.inlacou.exinput.free.text.search.SearchInput
 import com.inlacou.exinput.rx.textChanges
+import com.inlacou.exinput.utils.extensions.snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
-    var text: TextInput? = null
-    var date: DateInput? = null
-    var time: TimeInput? = null
-    var dateTime: DateTimeInput? = null
-    var inti: IntInput? = null
-    var doublei: DoubleInput? = null
-    var search: SearchInput? = null
-    var password: PasswordInput? = null
-    var email: EmailInput? = null
-    var phone: PhoneInput? = null
+	var text: TextInput? = null
+	var date: DateInput? = null
+	var time: TimeInput? = null
+	var dateTime: DateTimeInput? = null
+	var inti: IntInput? = null
+	var doublei: DoubleInput? = null
+	var search: SearchInput? = null
+	var password: PasswordInput? = null
+	var email: EmailInput? = null
+	var phone: PhoneInput? = null
 
-    var button: Button? = null
+	var button: Button? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
-        text = findViewById(R.id.text)
-        date = findViewById(R.id.date)
-        time = findViewById(R.id.time)
-        dateTime = findViewById(R.id.datetime)
-        inti = findViewById(R.id.int_i)
-        doublei = findViewById(R.id.double_i)
-        search = findViewById(R.id.search)
-        password = findViewById(R.id.password)
-        email = findViewById(R.id.email)
-        phone = findViewById(R.id.phone)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_main)
 
-        button = findViewById(R.id.validate)
+		text = findViewById(R.id.text)
+		date = findViewById(R.id.date)
+		time = findViewById(R.id.time)
+		dateTime = findViewById(R.id.datetime)
+		inti = findViewById(R.id.int_i)
+		doublei = findViewById(R.id.double_i)
+		search = findViewById(R.id.search)
+		password = findViewById(R.id.password)
+		email = findViewById(R.id.email)
+		phone = findViewById(R.id.phone)
 
-        button?.setOnClickListener {
-            text?.isValid()
-            date?.isValid()
-            time?.isValid()
-            dateTime?.isValid()
-            inti?.isValid()
-            doublei?.isValid()
-            search?.isValid()
-            password?.isValid()
-            email?.isValid()
-            phone?.isValid()
-        }
+		button = findViewById(R.id.validate)
 
-        text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
-    }
+		button?.setOnClickListener {
+			text?.isValid()
+			date?.isValid()
+			time?.isValid()
+			dateTime?.isValid()
+			inti?.isValid()
+			doublei?.isValid()
+			search?.isValid()
+			password?.isValid()
+			email?.isValid()
+			phone?.isValid()
+		}
+
+		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
+			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+		}
+	}
 }

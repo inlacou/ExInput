@@ -10,32 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import timber.log.Timber
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
-
-val systemDecimalSeparator: String
-	get() {
-		val nf = NumberFormat.getInstance()
-		return if (nf is DecimalFormat) {
-			nf.decimalFormatSymbols.decimalSeparator.toString()
-		}else {
-			"."
-		}
-	}
-
-val systemThousandSeparator: String
-	get() {
-		val nf = NumberFormat.getInstance()
-		return if (nf is DecimalFormat) {
-			when (nf.decimalFormatSymbols.decimalSeparator.toString()){
-				"," -> "."
-				else -> ","
-			}
-		}else {
-			","
-		}
-	}
 
 //https://es.wikipedia.org/wiki/Separador_de_millares
 fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands: Boolean = true,
@@ -135,26 +109,6 @@ fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands
 	}catch (nfe: NumberFormatException){
 		return ""
 	}
-}
-
-fun Int.toCharr(): String {
-	return if (this in 1..26) (this + 64).toChar().toString() else ""
-}
-
-fun Any.randomNumber(digits: Int): Int {
-	return (Math.random()*Math.pow(10.0, digits.toDouble())).toInt()
-}
-
-fun Any.randomText(characters: Int): String {
-	val generator = Random()
-	val randomStringBuilder = StringBuilder()
-	val randomLength = generator.nextInt(characters)
-	var tempChar: Char
-	for (i in 0 until randomLength) {
-		tempChar = (generator.nextInt(96) + 32).toChar()
-		randomStringBuilder.append(tempChar)
-	}
-	return randomStringBuilder.toString()
 }
 
 fun Context.getColorCompat(resId: Int): Int {
