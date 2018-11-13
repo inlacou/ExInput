@@ -8,6 +8,7 @@ import android.os.Handler
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import com.inlacou.exinput.BaseInput
+import com.inlacou.exinput.ExInputConfig
 import com.inlacou.exinput.R
 import com.inlacou.exinput.utils.extensions.*
 import java.util.*
@@ -80,9 +81,16 @@ open class DateTimeInput : BaseInput {
 	protected fun showDateDialog(onSet: (() -> Unit)? = null){
 		val now = Calendar.getInstance()
 		val dialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-			value = (value ?: Calendar.getInstance().toMidnight()).setYear(year).setMonth(month).setDayOfMonth(dayOfMonth)
+			val newValue = (value ?: Calendar.getInstance())
+			newValue.set(Calendar.SECOND, 0)
+			newValue.set(Calendar.MILLISECOND, 0)
+
+			newValue.set(Calendar.YEAR, year)
+			newValue.set(Calendar.MONTH, month)
+			newValue.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+			value = newValue
 			onSet?.invoke()
-		}, value?.year ?: now.year, value?.month ?: now.month,value?.dayOfMonth ?: now.dayOfMonth)
+		}, (value?:now).get(Calendar.YEAR), (value?:now).get(Calendar.MONTH), (value?:now).get(Calendar.DAY_OF_MONTH))
 
 		dialog.setOnCancelListener { value = null }
 
@@ -95,9 +103,15 @@ open class DateTimeInput : BaseInput {
 	protected fun showTimeDialog(onSet: (() -> Unit)? = null){
 		val now = Calendar.getInstance()
 		val dialog = TimePickerDialog(context, TimePickerDialog.OnTimeSetListener { view, hour, minute ->
-			value = (value ?: Calendar.getInstance()).setHours(hour).setMinutes(minute).setSeconds(0).setMilliseconds(0)
+			val newValue = (value ?: Calendar.getInstance())
+			newValue.set(Calendar.SECOND, 0)
+			newValue.set(Calendar.MILLISECOND, 0)
+
+			newValue.set(Calendar.HOUR_OF_DAY, hour)
+			newValue.set(Calendar.MINUTE, minute)
+			value = newValue
 			onSet?.invoke()
-		}, value?.hour ?: now.hour, value?.minute ?: now.minute, mode24h)
+		}, (value?:now).get(Calendar.HOUR_OF_DAY), (value?:now).get(Calendar.MINUTE), mode24h)
 
 		dialog.setOnCancelListener { value = null }
 
@@ -113,7 +127,7 @@ open class DateTimeInput : BaseInput {
 
 	protected open fun update(){
 		value.let {
-			if(it!=null)    setText(value.toDateTime(context, monthAsNumber = false))
+			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
 			else    setText("")
 		}
 	}

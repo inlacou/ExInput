@@ -3,7 +3,7 @@ package com.inlacou.exinput.free.datetime
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import com.inlacou.exinput.utils.extensions.toTime
+import com.inlacou.exinput.ExInputConfig
 
 /**
  * Created by inlacou on 14/06/17.
@@ -21,7 +21,7 @@ open class TimeInput : DateTimeInput {
 
 	override fun update(){
 		value.let {
-			if(it!=null)    setText(value.toTime(false))
+			if(it!=null)    setText(ExInputConfig.toTime.invoke(it))
 			else    setText("")
 		}
 	}
