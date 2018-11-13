@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<!-- Basic colors -->
+	<color name="exinput_basic_black">#000</color>
+	<color name="exinput_transparent">#0000</color>
+
+	<!-- By Lara -->
+	<color name="exinput_hint_over_white">#AAA</color>
+	<color name="exinput_hint_over_gray">#808080</color>
+	<color name="exinput_hint_over_blue">#8AB5DD</color>
+	<color name="exinput_red_text">#ce221f</color>
+
+	<!-- By Inlacou -->
+	<color name="exinput_focused_hint">@color/exinput_hint_over_white</color>
+	<color name="exinput_unfocused_hint">@color/exinput_hint_over_white</color>
+
+	<color name="colorPrimary">#3F51B5</color>
+	<color name="colorPrimaryDark">#303F9F</color>
+	<color name="colorAccent">#FF4081</color>
+</resources>

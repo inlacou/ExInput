@@ -1,0 +1,72 @@
+package com.inlacou.exinput.utils.extensions
+
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
+import java.net.URLEncoder
+import java.text.DecimalFormat
+import java.text.NumberFormat
+
+fun String.fromHtml(): Spanned? {
+	return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+		Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+	} else {
+		Html.fromHtml(this)
+	}
+}
+
+fun String.urlEncode(encoder: String = "UTF-8"): String = URLEncoder.encode(this, encoder)
+
+val String.digitsNum: Int
+	get() = this.filter { it.toString().isNumeric() }.length
+
+fun String?.isAlpha(allowSpaces: Boolean = false): Boolean {
+	return if(allowSpaces) this?.matches("^[ñÑa-zA-Z ]*$".toRegex()) ?: false
+	else this?.matches("^[ña-zA-Z]*$".toRegex()) ?: false
+}
+
+fun String?.isAlphaNumeric(allowSpaces: Boolean = false): Boolean {
+	return if(allowSpaces) this?.matches("^[ñÑa-zA-Z0-9 ]*$".toRegex()) ?: false
+	else this?.matches("^[ña-zA-Z0-9]*$".toRegex()) ?: false
+}
+
+fun String?.isNumeric(): Boolean {
+	return this?.matches("^[0-9]*$".toRegex()) ?: false
+}
+
+fun String?.isValidEmail(): Boolean {
+	return this!=null && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+}
+
+fun String?.isValidPhone(): Boolean {
+	return this!=null && android.util.Patterns.PHONE.matcher(this).matches()
+}
+
+fun String?.isValidWebUrl(): Boolean {
+	return this!=null && android.util.Patterns.WEB_URL.matcher(this).matches()
+}
+
+fun String.copyToClipboard(context: Context, label: String = "label") {
+	val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+	val clip = ClipData.newPlainText(label, this)
+	clipboard.primaryClip = clip
+}
+
+fun Context.getClipboardText(): CharSequence {
+	val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+	return clipboard.primaryClip?.getItemAt(0)?.text ?: ""
+}
+
+val decimalSeparator: String
+	get() {
+		val nf = NumberFormat.getInstance()
+		return if (nf is DecimalFormat) {
+			nf.decimalFormatSymbols.decimalSeparator.toString()
+		}else {
+			"."
+		}
+	}

@@ -1,0 +1,70 @@
+package com.inlacou.exinputapp
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.inlacou.exinput.free.datetime.DateInput
+import com.inlacou.exinput.free.datetime.DateTimeInput
+import com.inlacou.exinput.free.datetime.TimeInput
+import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
+import com.inlacou.exinput.free.numeric.vint.IntInput
+import com.inlacou.exinput.free.text.TextInput
+import com.inlacou.exinput.free.text.email.EmailInput
+import com.inlacou.exinput.free.text.password.PasswordInput
+import com.inlacou.exinput.free.text.phone.PhoneInput
+import com.inlacou.exinput.free.text.search.SearchInput
+import com.inlacou.exinput.rx.textChanges
+import io.reactivex.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
+
+class MainActivity : AppCompatActivity() {
+
+    var text: TextInput? = null
+    var date: DateInput? = null
+    var time: TimeInput? = null
+    var dateTime: DateTimeInput? = null
+    var inti: IntInput? = null
+    var doublei: DoubleInput? = null
+    var search: SearchInput? = null
+    var password: PasswordInput? = null
+    var email: EmailInput? = null
+    var phone: PhoneInput? = null
+
+    var button: Button? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        
+        text = findViewById(R.id.text)
+        date = findViewById(R.id.date)
+        time = findViewById(R.id.time)
+        dateTime = findViewById(R.id.datetime)
+        inti = findViewById(R.id.int_i)
+        doublei = findViewById(R.id.double_i)
+        search = findViewById(R.id.search)
+        password = findViewById(R.id.password)
+        email = findViewById(R.id.email)
+        phone = findViewById(R.id.phone)
+
+        button = findViewById(R.id.validate)
+
+        button?.setOnClickListener {
+            text?.isValid()
+            date?.isValid()
+            time?.isValid()
+            dateTime?.isValid()
+            inti?.isValid()
+            doublei?.isValid()
+            search?.isValid()
+            password?.isValid()
+            email?.isValid()
+            phone?.isValid()
+        }
+
+        text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+}

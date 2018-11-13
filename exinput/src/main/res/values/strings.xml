@@ -1,0 +1,34 @@
+<resources>
+	<!-- Formularies -->
+	<string name="expinput_Field_length_too_long">El contenido del campo es demasiado largo.</string>
+	<string name="expinput_Field_can_only_contain_numbers">Este campo solo puede contener números.</string>
+	<string name="expinput_Field_length_variable">La longitud debe ser de %1$d caracteres.</string>
+	<string name="expinput_Field_length_one_of_variable_or_variable">La longitud debe ser de %1$s o %2$d caracteres.</string>
+	<string name="expinput_Required_field">Campo requerido</string>
+	<string name="expinput_Email_not_valid">Dirección de e-mail inválida</string>
+	<string name="expinput_Phone_not_valid">Número de teléfono inválido</string>
+	<string name="expinput_Passwords_must_match">Las contraseñas deben coincidir</string>
+	<!-- /Formularies -->
+	<!-- TextInputEditTexts -->
+	<string name="expinput_Max_variable_digits">Máximo %1$s dígitos</string>
+	<string name="Max_variable_decimals">Máximo %1$s decimales</string>
+	<!-- /TextInputEditTexts -->
+	<!-- TimeUtils -->
+	<string name="expinput_date">%1$td %1$tb %1$tY</string>
+	<string name="expinput_date_month_as_number">%1$td/%1$tm/%1$tY</string>
+	<string name="expinput_datetime">%1$td %1$tb %1$tY%2$s%1$tk:%1$tM</string>
+	<string name="expinput_datetime_month_as_number">%1$td/%1$tm/%1$tY%2$s%1$tk:%1$tM</string>
+	<string name="expinput_datetime_day_of_week">%1$ta %1$td %1$tb %1$tY%2$s%1$tk:%1$tM</string>
+	<string name="expinput_datetime_day_of_week_month_as_number">%1$ta %1$td/%1$tm/%1$tY%2$s%1$tk:%1$tM</string>
+	<string name="expinput_time">%1$tk:%1$tM</string>
+	<string name="expinput_day_of_week">%1$tA</string>
+	<string name="expinput_Variable_years">%1$d años</string>
+	<string name="expinput_Variable_months">%1$d meses</string>
+	<string name="expinput_Variable_weeks">%1$d semanas</string>
+	<string name="expinput_Variable_days">%1$d días</string>
+	<string name="expinput_Variable_hours">%1$d horas</string>
+	<string name="expinput_Variable_minutes">%1$d minutos</string>
+	<string name="expinput_Variable_seconds">%1$d segundos</string>
+	<string name="expinput_Variable_milliseconds">%1$d milisegundos</string>
+	<!-- /TimeUtils -->
+</resources>

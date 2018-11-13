@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <declare-styleable name="BaseInput">
+        <attr name="required" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="DateTimeInput">
+        <attr name="mode24h" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="TextInput">
+        <attr name="maxLength" format="integer"/>
+        <attr name="minLength" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="PasswordInput">
+        <attr name="showHideButton" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="NumberInput">
+        <attr name="maxDigits" format="integer"/>
+        <attr name="markThousands" format="boolean"/>
+        <attr name="thousandSeparator" format="string|reference"/>
+        <attr name="decimalSeparator" format="string|reference"/>
+    </declare-styleable>
+    <declare-styleable name="DoubleInput">
+        <attr name="maxIntegers" format="integer"/>
+        <attr name="maxDecimals" format="integer"/>
+    </declare-styleable>
+</resources>
