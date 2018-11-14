@@ -104,7 +104,8 @@
 					android:id="@+id/search"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:theme="@style/exinput_input"
+					android:drawablePadding="@dimen/general_all"
+					android:padding="@dimen/general_all"
 					android:hint="search"/>
 		</com.google.android.material.textfield.TextInputLayout>
 

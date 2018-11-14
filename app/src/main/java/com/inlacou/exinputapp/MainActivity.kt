@@ -1,6 +1,7 @@
 package com.inlacou.exinputapp
 
 import android.os.Bundle
+import android.text.style.TtsSpan
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +16,8 @@ import com.inlacou.exinput.free.text.password.PasswordInput
 import com.inlacou.exinput.free.text.phone.PhoneInput
 import com.inlacou.exinput.free.text.search.SearchInput
 import com.inlacou.exinput.rx.textChanges
-import com.inlacou.exinput.utils.extensions.snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
+
+		Timber.plant(Timber.DebugTree())
 
 		text = findViewById(R.id.text)
 		date = findViewById(R.id.date)

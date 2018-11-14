@@ -30,5 +30,6 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"                                           //RX
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"                                              //RX
+    implementation 'com.jakewharton.timber:timber:4.6.0'                                        //Better logging, integrated with Crashlytics
     implementation project(':exinput')
 }
