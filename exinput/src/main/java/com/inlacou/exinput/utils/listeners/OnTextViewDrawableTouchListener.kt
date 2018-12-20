@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.inlacou.exinput.BaseInput
 import timber.log.Timber
 
-abstract class OnTextViewDrawableTouchListener : OnTouchListener {
+abstract class OnTextViewDrawableTouchListener(val interceptAllClick: Boolean = false) : OnTouchListener {
 
 	enum class TouchTarget {
 		RIGHT, LEFT
@@ -38,7 +38,7 @@ abstract class OnTextViewDrawableTouchListener : OnTouchListener {
 			}
 			if(!handled) Timber.d("click inside")
 		}
-		return handled
+		return handled || interceptAllClick
 	}
 
 	abstract fun onDrawableClick(touchTarget: TouchTarget)

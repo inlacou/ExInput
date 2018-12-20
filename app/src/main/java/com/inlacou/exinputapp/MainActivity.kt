@@ -16,6 +16,8 @@ import com.inlacou.exinput.free.text.password.PasswordInput
 import com.inlacou.exinput.free.text.phone.PhoneInput
 import com.inlacou.exinput.free.text.search.SearchInput
 import com.inlacou.exinput.rx.textChanges
+import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
+import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 	var password: PasswordInput? = null
 	var email: EmailInput? = null
 	var phone: PhoneInput? = null
+	var test: PhoneInput? = null
 
 	var button: Button? = null
 
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 		password = findViewById(R.id.password)
 		email = findViewById(R.id.email)
 		phone = findViewById(R.id.phone)
+		test = findViewById(R.id.test)
 
 		button = findViewById(R.id.validate)
 
@@ -70,5 +74,13 @@ class MainActivity : AppCompatActivity() {
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 		}
+		test?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
+			override fun onDrawableClick(touchTarget: TouchTarget) {
+				Toast.makeText(this@MainActivity, when(touchTarget){
+					RIGHT -> "add"
+					LEFT -> "substract"
+				}, Toast.LENGTH_SHORT).show()
+			}
+		})
 	}
 }
