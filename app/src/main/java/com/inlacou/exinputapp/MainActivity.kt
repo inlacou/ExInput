@@ -1,10 +1,12 @@
 package com.inlacou.exinputapp
 
 import android.os.Bundle
-import android.text.style.TtsSpan
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.datetime.TimeInput
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 	var password: PasswordInput? = null
 	var email: EmailInput? = null
 	var phone: PhoneInput? = null
+	var spinnerAppcompat: AppCompatSpinner? = null
+	var spinner: Spinner? = null
 
 	var button: Button? = null
 
@@ -69,6 +73,21 @@ class MainActivity : AppCompatActivity() {
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+		}
+
+		// Create an ArrayAdapter using the string array and a default spinner layout
+		val adapter = ArrayAdapter(this, R.layout.common_simple_list_item, R.id.text1, listOf("one", "two", "three"))
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(R.layout.common_simple_list_item)
+		// Apply the adapter to the spinner
+		spinnerAppcompat?.adapter = adapter
+		spinner?.adapter = adapter
+
+		spinner?.setOnItemClickListener { adapterView, view, i, l ->
+			Toast.makeText(this, "click $i", Toast.LENGTH_SHORT).show()
+		}
+		spinnerAppcompat?.setOnItemClickListener { adapterView, view, i, l ->
+			Toast.makeText(this, "click $i", Toast.LENGTH_SHORT).show()
 		}
 	}
 }
