@@ -14,6 +14,8 @@ import com.inlacou.exinput.free.text.email.EmailInput
 import com.inlacou.exinput.free.text.password.PasswordInput
 import com.inlacou.exinput.free.text.phone.PhoneInput
 import com.inlacou.exinput.free.text.search.SearchInput
+import com.inlacou.exinput.rx.drawableClicks
+import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
@@ -73,13 +75,11 @@ class MainActivity : AppCompatActivity() {
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 		}
-		etOnlyEditableThroughDrawables?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
-			override fun onDrawableClick(touchTarget: TouchTarget) {
-				Toast.makeText(this@MainActivity, when(touchTarget){
-					RIGHT -> "add"
-					LEFT -> "substract"
-				}, Toast.LENGTH_SHORT).show()
-			}
-		})
+		etOnlyEditableThroughDrawables?.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
+			Toast.makeText(this@MainActivity, when(it){
+				RIGHT -> "add"
+				LEFT -> "substract"
+			}, Toast.LENGTH_SHORT).show()
+		}
 	}
 }
