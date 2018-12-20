@@ -1,7 +1,6 @@
 package com.inlacou.exinputapp
 
 import android.os.Bundle
-import android.text.style.TtsSpan
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 	var password: PasswordInput? = null
 	var email: EmailInput? = null
 	var phone: PhoneInput? = null
-	var test: PhoneInput? = null
+	var etOnlyEditableThroughDrawables: PhoneInput? = null
 
 	var button: Button? = null
 
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 		password = findViewById(R.id.password)
 		email = findViewById(R.id.email)
 		phone = findViewById(R.id.phone)
-		test = findViewById(R.id.test)
+		etOnlyEditableThroughDrawables = findViewById(R.id.et_only_editable_through_drawables)
 
 		button = findViewById(R.id.validate)
 
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 		}
-		test?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
+		etOnlyEditableThroughDrawables?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
 			override fun onDrawableClick(touchTarget: TouchTarget) {
 				Toast.makeText(this@MainActivity, when(touchTarget){
 					RIGHT -> "add"

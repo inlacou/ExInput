@@ -136,7 +136,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="new"
+				android:hint="new style"
 				style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:layout_width="match_parent"
@@ -146,18 +146,19 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="new"
+				android:hint="only drawables"
 				style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
-					android:id="@+id/test"
+					android:id="@+id/et_only_editable_thought_drawables"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:inputType="none"
+					android:focusable="false"
+					android:focusableInTouchMode="false"
 					android:drawablePadding="@dimen/general_all"
-					android:drawableStart="@drawable/space_invader"
-					android:drawableEnd="@drawable/space_invader"
-					android:drawableLeft="@drawable/space_invader"
-					android:drawableRight="@drawable/space_invader"/>
+					android:drawableStart="@android:drawable/ic_delete"
+					android:drawableEnd="@android:drawable/ic_input_add"
+					android:drawableLeft="@android:drawable/ic_delete"
+					android:drawableRight="@android:drawable/ic_input_add"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button
