@@ -29,7 +29,7 @@ abstract class OnTextViewDrawableTouchListener(val interceptAllClick: Boolean = 
 			}
 			textView.compoundDrawables[BaseInput.DRAWABLE_LEFT]?.let {
 				val touchAreaLeft = view.left
-				val touchAreaRight = touchAreaLeft + it.bounds.width() - view.paddingLeft
+				val touchAreaRight = touchAreaLeft + it.bounds.width() + view.paddingLeft
 				if (touchEventX >= touchAreaLeft && touchEventX <= touchAreaRight) {
 					onDrawableClick(TouchTarget.LEFT)
 					handled = true
