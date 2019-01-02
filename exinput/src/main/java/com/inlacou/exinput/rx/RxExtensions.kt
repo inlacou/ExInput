@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import com.inlacou.exinput.free.datetime.DateInput
+import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.numeric.NumberInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
@@ -37,7 +38,7 @@ fun TextView.textChanges(): Observable<String> {
 	return Observable.create(TextChangeObs(this))
 }
 
-fun DateInput.textChanges(): Observable<DateTimeInputObs.Item> {
+fun DateTimeInput.textChanges(): Observable<DateTimeInputObs.Item> {
 	return Observable.create(DateTimeInputObs(this))
 }
 

@@ -3,12 +3,13 @@ package com.inlacou.exinput.rx.input
 import android.text.Editable
 import android.text.TextWatcher
 import com.inlacou.exinput.free.datetime.DateInput
+import com.inlacou.exinput.free.datetime.DateTimeInput
 
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
 import java.util.*
 
-class DateTimeInputObs constructor(private val view: DateInput) : ObservableOnSubscribe<DateTimeInputObs.Item> {
+class DateTimeInputObs constructor(private val view: DateTimeInput) : ObservableOnSubscribe<DateTimeInputObs.Item> {
 
 	private lateinit var listener: TextWatcher
 

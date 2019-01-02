@@ -17,7 +17,6 @@ import com.inlacou.exinput.free.text.search.SearchInput
 import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
-import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
@@ -81,5 +80,20 @@ class MainActivity : AppCompatActivity() {
 				LEFT -> { etOnlyEditableThroughDrawables?.text = "substract"; "substract" }
 			}, Toast.LENGTH_SHORT).show()
 		}
+		dateTime?.textChanges()?.subscribe {
+
+        }
+		time?.textChanges()?.subscribe {
+
+        }
+		date?.textChanges()?.subscribe {
+
+        }
+		doublei?.textChanges()?.subscribe {
+
+        }
+		inti?.textChanges()?.subscribe {
+
+        }
 	}
 }
