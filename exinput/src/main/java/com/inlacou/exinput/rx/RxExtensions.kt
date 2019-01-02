@@ -4,7 +4,12 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import com.inlacou.exinput.free.datetime.DateInput
+import com.inlacou.exinput.free.numeric.NumberInput
+import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
+import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.exinput.rx.input.DateTimeInputObs
+import com.inlacou.exinput.rx.input.DoubleChangeObs
+import com.inlacou.exinput.rx.input.LongChangeObs
 import com.inlacou.exinput.rx.input.TextChangeObs
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import io.reactivex.Observable
@@ -34,6 +39,14 @@ fun TextView.textChanges(): Observable<String> {
 
 fun DateInput.textChanges(): Observable<DateTimeInputObs.Item> {
 	return Observable.create(DateTimeInputObs(this))
+}
+
+fun IntInput.textChanges(): Observable<Long> {
+	return Observable.create(LongChangeObs(this))
+}
+
+fun DoubleInput.textChanges(): Observable<Double> {
+	return Observable.create(DoubleChangeObs(this))
 }
 
 fun CheckBox.checkedChanges(): Observable<Boolean> {

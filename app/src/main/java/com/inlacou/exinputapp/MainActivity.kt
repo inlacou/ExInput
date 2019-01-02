@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity() {
 		}
 		etOnlyEditableThroughDrawables?.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this@MainActivity, when(it){
-				RIGHT -> "add"
-				LEFT -> "substract"
+				RIGHT -> { etOnlyEditableThroughDrawables?.text = "add"; "add" }
+				LEFT -> { etOnlyEditableThroughDrawables?.text = "substract"; "substract" }
 			}, Toast.LENGTH_SHORT).show()
 		}
 	}
