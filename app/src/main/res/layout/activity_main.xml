@@ -21,6 +21,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
+					app:required="true"
 					android:hint="text"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +138,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:hint="new style"
-				style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+				style="@style/test2">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
@@ -147,7 +148,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:hint="only drawables"
-				style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+				style="@style/test2">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:id="@+id/et_only_editable_through_drawables"
 					android:layout_width="match_parent"

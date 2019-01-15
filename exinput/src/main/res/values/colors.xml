@@ -10,9 +10,15 @@
 	<color name="exinput_hint_over_blue">#8AB5DD</color>
 	<color name="exinput_red_text">#ce221f</color>
 
+	<color name="exinput_red">#F00</color>
+	<color name="exinput_blue">#00F</color>
+	<color name="exinput_pink">#F0F</color>
+
 	<!-- By Inlacou -->
-	<color name="exinput_focused_hint">@color/exinput_hint_over_white</color>
-	<color name="exinput_unfocused_hint">@color/exinput_hint_over_white</color>
+	<color name="exinput_focused_hint">@color/exinput_red</color>
+	<color name="exinput_unfocused_hint">@color/exinput_blue</color>
+	<color name="exinput_focused_outline">@color/exinput_red</color>
+	<color name="exinput_unfocused_outline">@color/exinput_blue</color>
 
 	<color name="colorPrimary">#3F51B5</color>
 	<color name="colorPrimaryDark">#303F9F</color>

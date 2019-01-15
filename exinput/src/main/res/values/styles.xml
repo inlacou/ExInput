@@ -37,15 +37,17 @@
 	</style>
 
 	<style name="exinput_textInputLayout">
-		<!-- Hint color when not focused and enabled -->
+		<!-- Hint color and label color in FALSE state -->
 		<item name="android:textColorHint">@color/exinput_unfocused_hint</item>
+		<item name="android:textSize">20sp</item>
 		<item name="hintTextAppearance">@style/exinput_textInputLayout.hint</item>
-	</style>
-
-	<style name="exinput_textInputLayoutDisabled">
-		<!-- Hint color when not focused and disabled -->
-		<item name="android:textColorHint">@color/exinput_focused_hint</item>
-		<item name="hintTextAppearance">@style/exinput_textInputLayout.hint</item>
+		<!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+		<item name="colorAccent">@color/exinput_focused_hint</item>
+		<item name="colorControlNormal">@color/exinput_focused_hint</item>
+		<item name="colorControlActivated">@color/exinput_focused_hint</item>
+		on old -> focused hint color is always colorPrimary wtf
+		on new -> unfocused hint color seems always grey wtf
+		on old -> search one has red underline and position marker wtf
 	</style>
 
 	<style name="exinput_textInputLayout.hint" parent="TextAppearance.AppCompat.Small">
