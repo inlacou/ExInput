@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/exinput_focused_outline" android:state_focused="true"/>
+    <item android:color="@color/exinput_unfocused_outline" android:state_hovered="true"/>
+    <item android:color="@color/exinput_unfocused_outline"/>
+</selector>

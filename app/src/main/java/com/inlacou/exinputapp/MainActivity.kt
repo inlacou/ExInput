@@ -17,6 +17,7 @@ import com.inlacou.exinput.free.text.search.SearchInput
 import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
+import com.inlacou.exinput.utils.extensions.checkNotEmpty
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber

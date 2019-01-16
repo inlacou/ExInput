@@ -11,8 +11,15 @@
 	<color name="exinput_red_text">#ce221f</color>
 
 	<!-- By Inlacou -->
-	<color name="exinput_focused_hint">@color/exinput_hint_over_white</color>
-	<color name="exinput_unfocused_hint">@color/exinput_hint_over_white</color>
+	<color name="exinput_text_color">@color/exinput_basic_black</color>
+	<color name="exinput_focused_hint">@color/exinput_focused_general</color>
+	<color name="exinput_unfocused_hint">@color/exinput_unfocused_general</color>
+	<color name="exinput_focused_outline">@color/exinput_focused_general</color>
+	<color name="exinput_unfocused_outline">@color/exinput_unfocused_general</color>
+	<color name="exinput_focused_bottom_bar">@color/exinput_focused_general</color>
+	<color name="exinput_unfocused_bottom_bar">@color/exinput_unfocused_general</color>
+	<color name="exinput_focused_general">@color/colorPrimary</color>
+	<color name="exinput_unfocused_general">@color/exinput_hint_over_gray</color>
 
 	<color name="colorPrimary">#3F51B5</color>
 	<color name="colorPrimaryDark">#303F9F</color>

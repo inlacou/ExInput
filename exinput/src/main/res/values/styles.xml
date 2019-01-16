@@ -1,5 +1,45 @@
 <resources>
 
+	<style name="exinput_input">
+		<!-- Inputted text color at all times -->
+		<item name="colorControlNormal">@color/exinput_unfocused_bottom_bar</item>
+		<item name="colorControlActivated">@color/exinput_focused_bottom_bar</item>
+		<item name="android:drawablePadding">@dimen/general_all</item>
+		<!--<item name="colorControlHighlight">@color/basic_cyan</item>-->
+	</style>
+
+	<style name="exinput_textInputLayout">
+		<!-- Hint color and label color in FALSE state -->
+		<item name="android:textColorHint">@color/exinput_unfocused_hint</item>
+		<item name="android:textSize">20sp</item>
+		<!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+		<item name="colorControlNormal">@color/exinput_focused_hint</item>
+		<item name="colorControlActivated">@color/exinput_focused_hint</item>
+	</style>
+
+	<style name="exinput_outlined_textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+		<item name="boxStrokeColor">@color/text_input_hint_stroke_color</item>
+		<!--<item name="boxStrokeWidth">2dp</item>-->
+		<item name="hintTextAppearance">@style/exinput_textInputLayout.hint</item>
+		<item name="android:textColorHint">@color/exinput_unfocused_hint</item>
+	</style>
+
+	<style name="exinput_textInputLayout.hint" parent="TextAppearance.AppCompat.Small">
+		<!-- Hint color when focused -->
+		<item name="android:textColor">@color/exinput_focused_hint</item>
+	</style>
+
+	<!-- Currently unused
+
+	<style name="editText" parent="exinput_input">
+		<!- Inputted text color at all times ->
+		<item name="android:textColor">@color/exinput_text_color</item>
+		<item name="android:paddingTop">@dimen/general_all</item>
+		<item name="android:paddingBottom">@dimen/general_all</item>
+		<item name="android:textSize">17sp</item>
+		<item name="android:inputType">text</item>
+	</style>
+
 	<style name="TextLimitStyle" parent="TextAppearance.AppCompat.Small">
 		<item name="android:textColor">@color/colorAccent</item>
 		<item name="android:textStyle">bold</item>
@@ -11,49 +51,13 @@
 	</style>
 
 	<style name="exinput_inputDisabled">
-		<!-- Inputted text color at all times -->
+		<!- Inputted text color at all times ->
 		<item name="android:textColor">@color/exinput_transparent</item>
 		<item name="colorControlNormal">@color/exinput_transparent</item>
 		<item name="colorControlActivated">@color/exinput_transparent</item>
-		<!--<item name="colorControlHighlight">@color/basic_cyan</item>-->
+		<!-<item name="colorControlHighlight">@color/basic_cyan</item>->
 	</style>
 
-	<style name="exinput_input">
-		<!-- Inputted text color at all times -->
-		<item name="android:textColor">@color/exinput_basic_black</item>
-		<item name="colorControlNormal">@color/exinput_basic_black</item>
-		<item name="colorControlActivated">@color/exinput_basic_black</item>
-		<item name="android:drawablePadding">@dimen/general_all</item>
-		<!--<item name="colorControlHighlight">@color/basic_cyan</item>-->
-	</style>
-
-	<style name="editText" parent="exinput_input">
-		<!-- Inputted text color at all times -->
-		<item name="android:textColor">@color/exinput_basic_black</item>
-		<item name="android:paddingTop">@dimen/general_all</item>
-		<item name="android:paddingBottom">@dimen/general_all</item>
-		<item name="android:textSize">17sp</item>
-		<item name="android:inputType">text</item>
-	</style>
-
-	<style name="exinput_textInputLayout">
-		<!-- Hint color when not focused and enabled -->
-		<item name="android:textColorHint">@color/exinput_unfocused_hint</item>
-		<item name="hintTextAppearance">@style/exinput_textInputLayout.hint</item>
-	</style>
-
-	<style name="exinput_textInputLayoutDisabled">
-		<!-- Hint color when not focused and disabled -->
-		<item name="android:textColorHint">@color/exinput_focused_hint</item>
-		<item name="hintTextAppearance">@style/exinput_textInputLayout.hint</item>
-	</style>
-
-	<style name="exinput_textInputLayout.hint" parent="TextAppearance.AppCompat.Small">
-		<!-- Hint color when focused -->
-		<item name="android:textColor">@color/exinput_focused_hint</item>
-	</style>
-
-	<!-- Currently unused
 	<style name="spinner" parent="exinput_input">
 		<item name="android:textColor">@color/exinput_basic_black</item>
 		<item name="android:textSize">17sp</item>
