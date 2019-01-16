@@ -15,6 +15,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.text.TextInput
 					android:id="@+id/text"
@@ -28,6 +29,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.datetime.DateInput
 					android:id="@+id/date"
@@ -40,6 +42,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.datetime.TimeInput
 					android:id="@+id/time"
@@ -52,6 +55,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.datetime.DateTimeInput
 					android:id="@+id/datetime"
@@ -64,6 +68,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.numeric.vint.IntInput
 					android:id="@+id/int_i"
@@ -76,6 +81,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 					android:id="@+id/double_i"
@@ -88,6 +94,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.text.password.PasswordInput
 					android:id="@+id/password"
@@ -100,11 +107,13 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.text.search.SearchInput
 					android:id="@+id/search"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
 					android:drawablePadding="@dimen/general_all"
 					android:padding="@dimen/general_all"
 					android:hint="search"/>
@@ -113,6 +122,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.text.email.EmailInput
 					android:id="@+id/email"
@@ -125,6 +135,7 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:id="@+id/phone"
@@ -138,21 +149,24 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:hint="new style"
-				style="@style/test2">
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				style="@style/exinput_outlined_textInputLayout">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
+					android:layout_height="wrap_content"
+					style="@style/exinput_input"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="only drawables"
-				style="@style/test2">
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				style="@style/exinput_outlined_textInputLayout">
 			<com.inlacou.exinput.free.text.phone.PhoneInput
 					android:id="@+id/et_only_editable_through_drawables"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					style="@style/exinput_input"
 					android:focusable="false"
 					android:focusableInTouchMode="false"
 					android:drawablePadding="@dimen/general_all"
