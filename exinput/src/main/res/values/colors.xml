@@ -8,7 +8,6 @@
 	<color name="exinput_hint_over_white">#AAA</color>
 	<color name="exinput_hint_over_gray">#808080</color>
 	<color name="exinput_hint_over_blue">#8AB5DD</color>
-	<color name="exinput_red_text">#ce221f</color>
 
 	<!-- By Inlacou -->
 	<color name="exinput_text_color">@color/exinput_basic_black</color>
