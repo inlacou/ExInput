@@ -3,4 +3,15 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#0AA</color>
+    <color name="basic_green">#0F0</color>
+    <color name="basic_cyan">#0FF</color>
+    <color name="basic_pink">#F0F</color>
+    <color name="basic_black">#000</color>
+    <color name="basic_yellow">#FF0</color>
+    <color name="basic_white">#FFF</color>
+    <color name="basic_red">#F00</color>
+    <color name="basic_blue">#00F</color>
+
+    <color name="exinput_focused_general">@color/basic_red</color>
+    <color name="exinput_unfocused_general">@color/basic_green</color>
 </resources>
