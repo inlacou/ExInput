@@ -17,6 +17,7 @@
 	<color name="exinput_unfocused_outline">@color/exinput_unfocused_general</color>
 	<color name="exinput_focused_bottom_bar">@color/exinput_focused_general</color>
 	<color name="exinput_unfocused_bottom_bar">@color/exinput_unfocused_general</color>
+
 	<color name="exinput_focused_general">@color/colorPrimary</color>
 	<color name="exinput_unfocused_general">@color/exinput_hint_over_gray</color>
 
