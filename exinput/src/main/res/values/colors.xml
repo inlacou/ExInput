@@ -3,6 +3,7 @@
 	<!-- Basic colors -->
 	<color name="exinput_basic_black">#000</color>
 	<color name="exinput_transparent">#0000</color>
+	<color name="pink">#F0F</color>
 
 	<!-- By Lara -->
 	<color name="exinput_hint_over_white">#AAA</color>
