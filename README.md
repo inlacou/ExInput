@@ -16,8 +16,29 @@ Better inputs for Android
 8. [Date](#date-input)
 9. [Time](#time-input)
 10. [DateTime](#datetime-input)
+11. [Icons](#icons)
+11. [Styling](#styling)
 
 ## Text input
+
+Example xml:
+```xml
+<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="text"
+				android:theme="@style/exinput_textInputLayout"
+				style="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.text.TextInput
+					android:id="@+id/text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					style="@style/exinput_input"
+					app:required="true"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
+
 ## Text email input
 ## Text password input
 ## Text phone input
@@ -27,3 +48,5 @@ Better inputs for Android
 ## Date input
 ## Time input
 ## DateTime input
+## Icons
+## Styling
