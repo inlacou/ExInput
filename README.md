@@ -4,22 +4,26 @@
 
 Better inputs for Android
 
-1. [Gradle Dependency](#gradle-dependency)
-2. [Changes in Version 2](#changes-in-version-2)
-
 # Input types:
 
 1. [Text](#text-input)
 2. [Text-email](#text-email-input)
-3. [Text-password] (#)
-4. [Text-phone] (#)
-5. [Text-search] (#)
-6. [Number-int] (#)
-7. [Number-double] (#)
-8. [Date] (#)
-9. [Time] (#)
-10. [DateTime] (#)
+3. [Text-password](#text-password-input)
+4. [Text-phone](#text-phone-input)
+5. [Text-search](#text-search-input)
+6. [Number-int](#number-int-input)
+7. [Number-double](#number-double-input)
+8. [Date](#date-input)
+9. [Time](#time-input)
+10. [DateTime](#date-time-input)
 
 ## Text input
-
 ## Text email input
+## Text password input
+## Text phone input
+## Text search input
+## Number int input
+## Number double input
+## Date input
+## Time input
+## DateTime input
