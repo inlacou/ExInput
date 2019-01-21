@@ -4,18 +4,21 @@
 
 Better inputs for Android
 
-1. [Gradle Dependency](#gradle-dependency)
+1. [Gradle Dependency]
 2. [Changes in Version 2](#changes-in-version-2)
 
-Input types:
+# Input types:
 
-Text
-Text-email
-Text-password
-Text-phone
-Text-search
-Number-int
-Number-double
+1. Text
+2. Text-email
+3. Text-password
+4. Text-phone
+5. Text-search
+6. Number-int
+7. Number-double
+8. Date
+9. Time
+10. DateTime
 
 ## Gradle Dependency
 
