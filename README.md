@@ -24,18 +24,18 @@ Better inputs for Android
 Example xml:
 ```xml
 <com.google.android.material.textfield.TextInputLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:hint="text"
-				android:theme="@style/exinput_textInputLayout"
-				style="@style/exinput_textInputLayout">
-			<com.inlacou.exinput.free.text.TextInput
-					android:id="@+id/text"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:theme="@style/exinput_input"
-					style="@style/exinput_input"
-					app:required="true"/>
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.text.TextInput
+		android:id="@+id/text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		style="@style/exinput_input"
+		app:required="true"/>
 </com.google.android.material.textfield.TextInputLayout>
 ```
 
