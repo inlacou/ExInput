@@ -18,6 +18,7 @@ import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
 import com.inlacou.exinput.utils.extensions.checkNotEmpty
+import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
@@ -75,6 +76,14 @@ class MainActivity : AppCompatActivity() {
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 		}
+		etOnlyEditableThroughDrawables?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
+			override fun onDrawableClick(touchTarget: TouchTarget) {
+				Toast.makeText(this@MainActivity, when(touchTarget){
+					RIGHT -> { etOnlyEditableThroughDrawables?.text = "add"; "add" }
+					LEFT -> { etOnlyEditableThroughDrawables?.text = "substract"; "substract" }
+				}, Toast.LENGTH_SHORT).show()
+			}
+		})
 		etOnlyEditableThroughDrawables?.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this@MainActivity, when(it){
 				RIGHT -> { etOnlyEditableThroughDrawables?.text = "add"; "add" }

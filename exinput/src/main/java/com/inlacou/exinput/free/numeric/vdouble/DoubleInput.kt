@@ -9,6 +9,7 @@ import com.inlacou.exinput.utils.extensions.digitsNum
 import com.inlacou.exinput.utils.extensions.formatDecimal
 import com.inlacou.exinput.utils.extensions.snackbar
 import com.inlacou.exinput.free.numeric.NumberInput
+import com.inlacou.exinput.utils.extensions.intergerNum
 import timber.log.Timber
 
 /**
@@ -69,10 +70,10 @@ open class DoubleInput : NumberInput {
 
 	private fun handleMaxDigits(){
 		maxIntegers?.let {
-			if(newText.digitsNum>it){
-				Timber.d("afterTextChanged | maxDigits: $newText to $previousText")
+			if(newText.intergerNum(decimalSeparator)>it){
+				Timber.d("afterTextChanged | maxIntegers: $newText to $previousText")
 				newText = previousText
-				snackbar(context.getString(R.string.expinput_Max_variable_digits, it.toString()))
+				snackbar(context.getString(R.string.expinput_Max_variable_integers, it.toString()))
 			}
 		}
 	}

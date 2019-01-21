@@ -26,7 +26,6 @@
 		<item name="hintTextColor">@color/exinput_focused_hint</item>
 		<!-- The color of the label in all other text field states (such as resting and disabled) -->
 		<item name="android:textColorHint">@color/exinput_unfocused_hint</item>
-
 	</style>
 
 	<style name="exinput_textInputLayout.hint" parent="TextAppearance.AppCompat.Small">

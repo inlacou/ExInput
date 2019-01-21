@@ -11,6 +11,7 @@
 	<!-- /Formularies -->
 	<!-- TextInputEditTexts -->
 	<string name="expinput_Max_variable_digits">Máximo %1$s dígitos</string>
+	<string name="expinput_Max_variable_integers">Máximo %1$s enteros</string>
 	<string name="Max_variable_decimals">Máximo %1$s decimales</string>
 	<!-- /TextInputEditTexts -->
 	<!-- TimeUtils -->

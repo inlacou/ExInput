@@ -3,12 +3,12 @@
     <declare-styleable name="BaseInput">
         <attr name="required" format="boolean"/>
     </declare-styleable>
-    <declare-styleable name="DateTimeInput">
-        <attr name="mode24h" format="boolean"/>
-    </declare-styleable>
     <declare-styleable name="TextInput">
         <attr name="maxLength" format="integer"/>
         <attr name="minLength" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="DateTimeInput">
+        <attr name="mode24h" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="PasswordInput">
         <attr name="showHideButton" format="boolean"/>

@@ -63,6 +63,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
+					app:mode24h="true"
 					android:hint="time"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +90,9 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
+					app:maxDigits="5"
+					app:markThousands="true"
+					app:thousandSeparator="."
 					android:hint="int"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -102,6 +106,11 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
+					app:maxIntegers="3"
+					app:maxDecimals="2"
+					app:decimalSeparator=","
+					app:markThousands="true"
+					app:thousandSeparator="."
 					android:hint="double"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -173,8 +182,8 @@
 					android:focusableInTouchMode="false"
 					android:drawablePadding="@dimen/general_all"
 					android:drawableStart="@android:drawable/ic_delete"
-					android:drawableEnd="@android:drawable/ic_input_add"
 					android:drawableLeft="@android:drawable/ic_delete"
+					android:drawableEnd="@android:drawable/ic_input_add"
 					android:drawableRight="@android:drawable/ic_input_add"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
