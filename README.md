@@ -20,8 +20,12 @@ Better inputs for Android
 11. [Styling](#styling)
 
 ## Text input
-
-Example xml:
+Free text input.
+### Attributes
+Required: boolean
+maxLength: integer
+minLength: integer
+### Example xml
 ```xml
 <com.google.android.material.textfield.TextInputLayout
 	android:layout_width="match_parent"
@@ -38,7 +42,6 @@ Example xml:
 		app:required="true"/>
 </com.google.android.material.textfield.TextInputLayout>
 ```
-
 ## Text email input
 ## Text password input
 ## Text phone input
