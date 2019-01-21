@@ -15,7 +15,7 @@ Better inputs for Android
 7. [Number-double](#number-double-input)
 8. [Date](#date-input)
 9. [Time](#time-input)
-10. [DateTime](#date-time-input)
+10. [DateTime](#datetime-input)
 
 ## Text input
 ## Text email input
