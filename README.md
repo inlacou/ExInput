@@ -23,7 +23,9 @@ Better inputs for Android
 Free text input.
 ### Attributes
 Required: boolean
+
 maxLength: integer
+
 minLength: integer
 ### Example xml
 ```xml
