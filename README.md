@@ -9,8 +9,8 @@ Better inputs for Android
 
 # Input types:
 
-1. [Text input] (#text-input)
-2. [Text-email] (#text-email-input)
+1. [Text](#text-input)
+2. [Text-email](#text-email-input)
 3. [Text-password] (#)
 4. [Text-phone] (#)
 5. [Text-search] (#)
