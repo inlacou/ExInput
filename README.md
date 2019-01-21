@@ -145,9 +145,182 @@ minLength: integer
 </com.google.android.material.textfield.TextInputLayout>
 ```
 ## Number int input
+Non floating number input.
+### Attributes
+maxDigits: integer
+
+markThousands: boolean
+
+thousandSeparator: string
+
+required: boolean
+### Example xml
+```xml
+<com.google.android.material.textfield.TextInputLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.numeric.vint.IntInput
+		android:id="@+id/int_i"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		app:maxDigits="5"
+		android:hint="int"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
 ## Number double input
+Floating number input.
+### Attributes
+maxDigits: integer
+
+maxIntegers: integer
+
+maxDecimals: integer
+
+markThousands: boolean
+
+thousandSeparator: string
+
+decimalSeparator: string
+
+required: boolean
+### Example xml
+```xml
+<com.google.android.material.textfield.TextInputLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.numeric.vdouble.DoubleInput
+		android:id="@+id/double_i"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		app:maxIntegers="3"
+		app:maxDecimals="2"
+		app:decimalSeparator=","
+		app:markThousands="true"
+		app:thousandSeparator="."
+		android:hint="double"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
 ## Date input
+Date input.
+### Attributes
+required: boolean
+### Example xml
+```xml
+<com.google.android.material.textfield.TextInputLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.datetime.DateInput
+		android:id="@+id/date"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		android:hint="date"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
 ## Time input
+Time input.
+### Attributes
+required: boolean
+### Example xml
+```xml
+<com.google.android.material.textfield.TextInputLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.datetime.TimeInput
+		android:id="@+id/time"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		app:mode24h="false"
+		android:hint="time"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
 ## DateTime input
+Date time input.
+### Attributes
+required: boolean
+### Example xml
+```xml
+<com.google.android.material.textfield.TextInputLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:hint="text"
+	android:theme="@style/exinput_textInputLayout"
+	style="@style/exinput_textInputLayout">
+	<com.inlacou.exinput.free.datetime.DateTimeInput
+		android:id="@+id/time"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/exinput_input"
+		app:mode24h="true"
+		android:hint="time"/>
+</com.google.android.material.textfield.TextInputLayout>
+```
 ## Icons
+Add them as usual.
+### Listener
+Basic way:
+```kt
+yourTextInput?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
+	override fun onDrawableClick(touchTarget: TouchTarget) {
+		when(it){
+			RIGHT -> { /*Clicked on right/end drawable*/ }
+			LEFT -> { /*Clicked on left/start drawable*/ }
+			}
+		}
+	})
+```
+Rx way:
+```kt
+yourTextInput.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
+	when(it){
+		RIGHT -> { /*Clicked on right/end drawable*/ }
+		LEFT -> { /*Clicked on left/start drawable*/ }
+	}
+}
+```
+### Example xml
+```xml
+android:drawableStart="@android:drawable/ic_delete"
+android:drawableLeft="@android:drawable/ic_delete"
+```
 ## Styling
+Easiest way is to just override this colors:
+```xml
+<color name="exinput_focused_general">@color/colorAccent</color>
+<color name="exinput_unfocused_general">@color/colorPrimary</color>
+```
+Or you can override this ones:
+```xml
+<color name="exinput_text_color">@color/exinput_basic_black</color>
+<color name="exinput_focused_hint">@color/exinput_focused_general</color>
+<color name="exinput_unfocused_hint">@color/exinput_unfocused_general</color>
+<color name="exinput_focused_outline">@color/exinput_focused_general</color>
+<color name="exinput_unfocused_outline">@color/exinput_unfocused_general</color>
+<color name="exinput_focused_bottom_bar">@color/exinput_focused_general</color>
+<color name="exinput_unfocused_bottom_bar">@color/exinput_unfocused_general</color>
+```
+Or you can extend this styles:
+```xml
+
+```
+I you want full control you can make your own styles and ignore mine!
+```xml
+<style name="exinput_input"/> <!-- for text inputs -->
+<style name="exinput_textInputLayout"/> <!-- For old layout -->
+<style name="exinput_outlined_textInputLayout"/> <!-- For box layout -->
+```
