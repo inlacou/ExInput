@@ -187,6 +187,19 @@
 					android:drawableRight="@android:drawable/ic_input_add"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.trigger.TriggerInput
+					android:id="@+id/et_trigger"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					android:hint="trigger"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
 		<Button
 				android:id="@+id/validate"
 				android:layout_width="match_parent"

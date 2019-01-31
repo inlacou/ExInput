@@ -14,6 +14,7 @@ import com.inlacou.exinput.free.text.email.EmailInput
 import com.inlacou.exinput.free.text.password.PasswordInput
 import com.inlacou.exinput.free.text.phone.PhoneInput
 import com.inlacou.exinput.free.text.search.SearchInput
+import com.inlacou.exinput.free.trigger.TriggerInput
 import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 	var email: EmailInput? = null
 	var phone: PhoneInput? = null
 	var etOnlyEditableThroughDrawables: PhoneInput? = null
+	var etTrigger: TriggerInput? = null
 
 	var button: Button? = null
 
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 		email = findViewById(R.id.email)
 		phone = findViewById(R.id.phone)
 		etOnlyEditableThroughDrawables = findViewById(R.id.et_only_editable_through_drawables)
+		etTrigger = findViewById(R.id.et_trigger)
 
 		button = findViewById(R.id.validate)
 
@@ -105,5 +108,8 @@ class MainActivity : AppCompatActivity() {
 		inti?.textChanges()?.subscribe {
 
         }
+		etTrigger?.onWork = {
+			Toast.makeText(this, "Put here your own action to change value!", Toast.LENGTH_LONG).show()
+		}
 	}
 }
