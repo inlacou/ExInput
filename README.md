@@ -316,8 +316,11 @@ Or you can override this ones:
 ```
 Current colors are:
 exinput_basic_black: ![#000](https://placehold.it/15/000/000000?text=+)
+
 exinput_focused_general: your colorAccent
+
 exinput_unfocused_general: your colorPrimary
+
 
 Or you can extend this styles:
 ```xml
