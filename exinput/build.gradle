@@ -25,12 +25,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0' // Set this dependency to use JUnit 4
+    androidTestImplementation 'androidx.test:runner:1.2.0' // Set this dependency to use JUnit 4
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.android.material:material:1.1.0-alpha02"                         //https://github.com/material-components/material-components-android
-    implementation 'com.jakewharton.timber:timber:4.6.0'                                        //Better logging, integrated with Crashlytics
-    compileOnly "io.reactivex.rxjava2:rxjava:2.2.5"                                             //RX
+    implementation "com.google.android.material:material:1.1.0-alpha10"                         //https://github.com/material-components/material-components-android
+    implementation 'com.jakewharton.timber:timber:4.7.1'                                        //Better logging, integrated with Crashlytics
+    compileOnly "io.reactivex.rxjava2:rxjava:2.2.10"                                             //RX
 }
 repositories {
     mavenCentral()

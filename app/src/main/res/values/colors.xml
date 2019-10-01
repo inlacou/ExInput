@@ -12,6 +12,6 @@
     <color name="basic_red">#F00</color>
     <color name="basic_blue">#00F</color>
 
-    <color name="exinput_focused_general">@color/colorPrimary</color>
+    <color name="exinput_focused_general">@color/basic_red</color>
     <color name="exinput_unfocused_general">@color/colorPrimaryDark</color>
 </resources>
