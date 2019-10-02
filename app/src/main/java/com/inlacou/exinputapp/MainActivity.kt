@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.inlacou.exinput.exceptions.InvalidException
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.datetime.TimeInput
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
 	var text: TextInput? = null
+	var textRange: TextInput? = null
 	var date: DateInput? = null
 	var time: TimeInput? = null
 	var dateTime: DateTimeInput? = null
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 	var etTrigger: TriggerInput? = null
 
 	var button: Button? = null
+	var buttonThrow: Button? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 		Timber.plant(Timber.DebugTree())
 
 		text = findViewById(R.id.text)
+		textRange = findViewById(R.id.text_in_range)
 		date = findViewById(R.id.date)
 		time = findViewById(R.id.time)
 		dateTime = findViewById(R.id.datetime)
@@ -65,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
 		button?.setOnClickListener {
 			text?.isValid()
+			textRange?.isValid()
 			date?.isValid()
 			time?.isValid()
 			dateTime?.isValid()
@@ -74,6 +79,26 @@ class MainActivity : AppCompatActivity() {
 			password?.isValid()
 			email?.isValid()
 			phone?.isValid()
+		}
+
+		buttonThrow = findViewById(R.id.validate_throw)
+
+		buttonThrow?.setOnClickListener {
+			try {
+				text?.isValidThrowExceptions()
+				textRange?.isValidThrowExceptions()
+				date?.isValidThrowExceptions()
+				time?.isValidThrowExceptions()
+				dateTime?.isValidThrowExceptions()
+				inti?.isValidThrowExceptions()
+				doublei?.isValidThrowExceptions()
+				search?.isValidThrowExceptions()
+				password?.isValidThrowExceptions()
+				email?.isValidThrowExceptions()
+				phone?.isValidThrowExceptions()
+			}catch (ie: InvalidException){
+				Toast.makeText(this, ie.message, Toast.LENGTH_LONG).show()
+			}
 		}
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {

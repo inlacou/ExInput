@@ -5,9 +5,16 @@ import android.text.Editable
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.R
+import com.inlacou.exinput.exceptions.InvalidException
+import com.inlacou.exinput.exceptions.reasons.AboveMaxLength
+import com.inlacou.exinput.exceptions.reasons.BelowMinLength
+import com.inlacou.exinput.exceptions.reasons.Reason
+import com.inlacou.exinput.exceptions.reasons.Required
 import com.inlacou.exinput.utils.extensions.checkMaxLength
 import com.inlacou.exinput.utils.extensions.checkMinLength
 import com.inlacou.exinput.free.FreeInput
+import com.inlacou.exinput.utils.extensions.checkNotEmpty
+import kotlin.math.max
 
 /**
  * Created by inlacou on 14/06/17.
@@ -77,6 +84,23 @@ open class TextInput : FreeInput {
 		result = result && (maxLength?.let { checkMaxLength(it) } ?: result)
 		result = result && (minLength?.let { checkMinLength(it) } ?: result)
 		return result
+	}
+
+	override fun getInvalidReasons(): List<Reason> {
+		val reasons = mutableListOf<Reason>()
+		reasons.addAll(super.getInvalidReasons())
+		maxLength?.let {
+			if (!checkMaxLength(it)) {
+				reasons.add(AboveMaxLength(text, it))
+			}
+		}
+		minLength?.let {
+			if (!checkMinLength(it)) {
+				reasons.add(BelowMinLength(text, it))
+			}
+		}
+
+		return reasons
 	}
 
 	private fun updateMaxLength(){

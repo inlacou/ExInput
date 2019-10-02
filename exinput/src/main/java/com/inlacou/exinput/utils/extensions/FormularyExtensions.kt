@@ -50,10 +50,18 @@ fun TextView?.checkSame(other: TextView?, stringResId: Int = R.string.expinput_P
 	return true
 }
 
+/**
+ * Return true if valid, false if not
+ * Return true if below max, false if above or equal
+ */
 fun TextInput?.checkMaxLength(max: Int, requestFocus: Boolean = true): Boolean {
 	return checkMaxLength(max.toLong(), requestFocus)
 }
 
+/**
+ * Return true if valid, false if not
+ * Return true if below max, false if above or equal
+ */
 fun TextView?.checkMaxLength(max: Long, requestFocus: Boolean = true): Boolean {
 	if(this!=null && this.text.toString().length>max){
 		//error = "${this.text.toString().length}/$max"
@@ -68,6 +76,10 @@ fun TextView?.checkMinLength(min: Int, requestFocus: Boolean = true): Boolean {
 	return checkMinLength(min.toLong(), requestFocus)
 }
 
+/**
+ * Return true if valid, false if not
+ * Return true if below max, false if below or equal
+ */
 fun TextView?.checkMinLength(min: Long, requestFocus: Boolean = true): Boolean {
 	if(this!=null && this.text.toString().length<min){
 		error = "${this.text.toString().length}/$min"
@@ -77,6 +89,9 @@ fun TextView?.checkMinLength(min: Long, requestFocus: Boolean = true): Boolean {
 	return true
 }
 
+/**
+ * Return true if valid, false if not
+ */
 fun BaseInput?.checkExactLength(length: Int): Boolean {
 	if(this!=null && this.text.length!=length){
 		error = context.getString(R.string.expinput_Field_length_variable, length)

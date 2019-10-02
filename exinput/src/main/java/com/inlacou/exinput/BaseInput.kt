@@ -6,6 +6,9 @@ import android.util.AttributeSet
 import android.view.ViewParent
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.inlacou.exinput.exceptions.InvalidException
+import com.inlacou.exinput.exceptions.reasons.Reason
+import com.inlacou.exinput.exceptions.reasons.Required
 import com.inlacou.exinput.utils.extensions.checkNotEmpty
 
 /**
@@ -50,6 +53,27 @@ abstract class BaseInput : TextInputEditText {
 		var result = true
 		if(required) result = result && checkNotEmpty()
 		return result
+	}
+
+	/**
+	 * Function to determine if contents are valid, depending on configuration
+	 * @throws InvalidException detailing why it failed
+	 */
+	open fun isValidThrowExceptions(): Boolean {
+		getInvalidReasons().let{
+			if(it.isNotEmpty()){
+				throw InvalidException(it)
+			}
+		}
+		return true
+	}
+
+	protected open fun getInvalidReasons(): List<Reason> {
+		val reasons = mutableListOf<Reason>()
+		if(required && !checkNotEmpty()) {
+			reasons.add(Required())
+		}
+		return reasons
 	}
 
 	override fun onAttachedToWindow() {

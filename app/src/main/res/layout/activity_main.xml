@@ -30,6 +30,23 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:hint="text in range"
+				android:theme="@style/exinput_textInputLayout"
+				style="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.text.TextInput
+					android:id="@+id/text_in_range"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					style="@style/exinput_input"
+					app:minLength="5"
+					android:maxLength="15"
+					app:required="true"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
 				android:hint="new style"
 				android:theme="@style/exinput_outlined_textInputLayout"
 				style="@style/exinput_outlined_textInputLayout">
@@ -205,6 +222,12 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="Validate"/>
+
+		<Button
+				android:id="@+id/validate_throw"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Validate &amp; throw"/>
 
 	</LinearLayout>
 

@@ -4,6 +4,9 @@ import android.content.Context
 import android.text.Editable
 import android.text.InputType
 import android.util.AttributeSet
+import com.inlacou.exinput.exceptions.reasons.InvalidEmailAddress
+import com.inlacou.exinput.exceptions.reasons.InvalidPhoneNumber
+import com.inlacou.exinput.exceptions.reasons.Reason
 import com.inlacou.exinput.utils.extensions.checkEmailCorrect
 import com.inlacou.exinput.utils.extensions.checkPhoneCorrect
 import com.inlacou.exinput.free.text.TextInput
@@ -23,6 +26,15 @@ open class PhoneInput : TextInput {
 	override fun onTextChanged(s: Editable?) {
 		super.onTextChanged(s)
 		checkPhoneCorrect(false)
+	}
+
+	override fun getInvalidReasons(): List<Reason> {
+		val reasons = mutableListOf<Reason>()
+		reasons.addAll(super.getInvalidReasons())
+		if(!checkPhoneCorrect(false)) {
+			reasons.add(InvalidPhoneNumber(text))
+		}
+		return reasons
 	}
 
 	override fun isValid(): Boolean {

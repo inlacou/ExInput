@@ -4,8 +4,13 @@ import android.content.Context
 import android.text.Editable
 import android.text.InputType
 import android.util.AttributeSet
+import com.inlacou.exinput.exceptions.reasons.AboveMaxLength
+import com.inlacou.exinput.exceptions.reasons.BelowMinLength
+import com.inlacou.exinput.exceptions.reasons.InvalidEmailAddress
+import com.inlacou.exinput.exceptions.reasons.Reason
 import com.inlacou.exinput.utils.extensions.checkEmailCorrect
 import com.inlacou.exinput.free.text.TextInput
+import com.inlacou.exinput.utils.extensions.checkMinLength
 
 /**
  * Created by inlacou on 03/10/18.
@@ -22,6 +27,15 @@ open class EmailInput : TextInput {
 	override fun onTextChanged(s: Editable?) {
 		super.onTextChanged(s)
 		checkEmailCorrect(false)
+	}
+
+	override fun getInvalidReasons(): List<Reason> {
+		val reasons = mutableListOf<Reason>()
+		reasons.addAll(super.getInvalidReasons())
+		if(!checkEmailCorrect(false)) {
+			reasons.add(InvalidEmailAddress(text))
+		}
+		return reasons
 	}
 
 	override fun isValid(): Boolean {
