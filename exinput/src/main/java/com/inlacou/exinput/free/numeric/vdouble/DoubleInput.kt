@@ -64,14 +64,12 @@ open class DoubleInput : NumberInput {
 				onDecimalsLimited = {
 					snackbar(context.getString(R.string.Max_variable_decimals, maxDecimals.toString()))
 				})
-		Timber.d("afterTextChanged | $newText to $newText")
 		super.onTextChanged(s)
 	}
 
 	private fun handleMaxDigits(){
 		maxIntegers?.let {
 			if(newText.intergerNum(decimalSeparator)>it){
-				Timber.d("afterTextChanged | maxIntegers: $newText to $previousText")
 				newText = previousText
 				snackbar(context.getString(R.string.expinput_Max_variable_integers, it.toString()))
 			}
