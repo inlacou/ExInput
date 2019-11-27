@@ -29,9 +29,9 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.android.material:material:1.1.0-alpha10"                         //https://github.com/material-components/material-components-android
+    implementation "com.google.android.material:material:1.2.0-alpha02"                         //https://github.com/material-components/material-components-android
     implementation 'com.jakewharton.timber:timber:4.7.1'                                        //Better logging, integrated with Crashlytics
-    compileOnly "io.reactivex.rxjava2:rxjava:2.2.10"                                             //RX
+    compileOnly "io.reactivex.rxjava2:rxjava:2.2.14"                                             //RX
 }
 repositories {
     mavenCentral()
