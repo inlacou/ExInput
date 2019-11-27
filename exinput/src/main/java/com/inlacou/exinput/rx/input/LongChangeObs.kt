@@ -17,7 +17,10 @@ class LongChangeObs constructor(private val view: IntInput) : ObservableOnSubscr
 	override fun subscribe(subscriber: ObservableEmitter<Long>) {
 		listener = object: TextWatcher{
 			override fun afterTextChanged(s: Editable?) {
-				subscriber.onNext(s?.toString()?.toLongOrNull() ?: 0)
+				subscriber.onNext(s?.toString()
+					?.replace(view.thousandSeparator, "")
+					?.replace(view.decimalSeparator, ".")
+					?.toLongOrNull() ?: 0)
 			}
 
 			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

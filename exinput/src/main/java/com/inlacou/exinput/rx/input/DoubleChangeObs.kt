@@ -16,7 +16,10 @@ class DoubleChangeObs constructor(private val view: DoubleInput) : ObservableOnS
 	override fun subscribe(subscriber: ObservableEmitter<Double>) {
 		listener = object: TextWatcher{
 			override fun afterTextChanged(s: Editable?) {
-				subscriber.onNext(s?.toString()?.toDoubleOrNull() ?: 0.0)
+				subscriber.onNext(s?.toString()
+					?.replace(view.thousandSeparator, "")
+					?.replace(view.decimalSeparator, ".")
+					?.toDoubleOrNull() ?: 0.0)
 			}
 
 			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
