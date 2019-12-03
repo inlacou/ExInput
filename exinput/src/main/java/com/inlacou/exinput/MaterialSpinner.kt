@@ -13,7 +13,6 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.text.InputType
-import android.text.Selection.setSelection
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.SoundEffectConstants
@@ -34,7 +33,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.text.TextUtilsCompat
 import androidx.core.view.ViewCompat
-import androidx.core.widget.PopupWindowCompat.setOverlapAnchor
 import androidx.customview.view.AbsSavedState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
@@ -52,7 +50,7 @@ open class MaterialSpinner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     mode: Int = MODE_DROPDOWN
-) : TextInputLayout(context, attrs) {
+) : TextInputEditText(context, attrs) {
 
     companion object {
         /**
@@ -86,11 +84,6 @@ open class MaterialSpinner @JvmOverloads constructor(
     private val popup: SpinnerPopup
 
     /**
-     * The view that will display the selected item.
-     */
-    private val editText = TextInputEditText(getContext())
-
-    /**
      * Extended [android.widget.Adapter] that is the bridge between this Spinner and its data.
      */
     var adapter: SpinnerAdapter? = null
@@ -121,12 +114,12 @@ open class MaterialSpinner @JvmOverloads constructor(
     /**
      * The currently selected item.
      */
-    var selection = INVALID_POSITION
+    var selected = INVALID_POSITION
         set(value) {
             field = value
             adapter?.apply {
                 if (value in 0 until count) {
-                    editText.setText(
+                    setText(
                         when (val item = getItem(value)) {
                             is CharSequence -> item
                             else -> item.toString()
@@ -139,7 +132,7 @@ open class MaterialSpinner @JvmOverloads constructor(
                         getItemId(value)
                     )
                 } else {
-                    editText.setText("")
+                    setText("")
                     onItemSelectedListener?.onNothingSelected(this@MaterialSpinner)
                 }
             }
@@ -160,55 +153,43 @@ open class MaterialSpinner @JvmOverloads constructor(
      * selected.
      */
     val selectedItem: Any?
-        get() = popup.getItem(selection)
+        get() = popup.getItem(selected)
 
     /**
      * @return The id corresponding to the currently selected item, or {@link #INVALID_ROW_ID} if
      * nothing is selected.
      */
     val selectedItemId: Long
-        get() = popup.getItemId(selection)
+        get() = popup.getItemId(selected)
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.MaterialSpinner).run {
             getInt(R.styleable.MaterialSpinner_android_gravity, -1).let {
                 if (it > -1) {
                     gravity = it
-                    editText.gravity = it
+                    gravity = it
                 } else {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
                         @SuppressLint("RtlHardcoded")
                         if (isLayoutRtl()) {
                             gravity = Gravity.RIGHT
-                            editText.gravity = Gravity.RIGHT
+                            gravity = Gravity.RIGHT
                         } else {
                             gravity = Gravity.LEFT
-                            editText.gravity = Gravity.LEFT
+                            gravity = Gravity.LEFT
                         }
                     }
                 }
             }
-            editText.isEnabled =
-                getBoolean(R.styleable.MaterialSpinner_android_enabled, editText.isEnabled)
-            editText.isFocusable =
-                getBoolean(R.styleable.MaterialSpinner_android_focusable, editText.isFocusable)
-            editText.isFocusableInTouchMode = getBoolean(
-                R.styleable.MaterialSpinner_android_focusableInTouchMode,
-                editText.isFocusableInTouchMode
-            )
-            getColorStateList(R.styleable.MaterialSpinner_android_textColor)?.let {
-                editText.setTextColor(
-                    it
-                )
-            }
-            getDimensionPixelSize(
-                R.styleable.MaterialSpinner_android_textSize,
-                -1
-            ).let { if (it > 0) editText.textSize = it.toFloat() }
+            isEnabled = getBoolean(R.styleable.MaterialSpinner_android_enabled, isEnabled)
+            isFocusable = getBoolean(R.styleable.MaterialSpinner_android_focusable, isFocusable)
+            isFocusableInTouchMode = getBoolean(R.styleable.MaterialSpinner_android_focusableInTouchMode, isFocusableInTouchMode)
+            getColorStateList(R.styleable.MaterialSpinner_android_textColor)?.let { setTextColor(it) }
+            getDimensionPixelSize(R.styleable.MaterialSpinner_android_textSize, -1).let { if (it > 0) textSize = it.toFloat() }
             getText(R.styleable.MaterialSpinner_android_text)?.let {
                 // Allow text in debug mode for preview purposes.
                 if (isInEditMode) {
-                    editText.setText(it)
+                    setText(it)
                 } else {
                     throw RuntimeException(
                         "Don't set text directly." +
@@ -217,23 +198,14 @@ open class MaterialSpinner @JvmOverloads constructor(
                 }
             }
             popup = when (getInt(R.styleable.MaterialSpinner_spinnerMode, mode)) {
-                MODE_DIALOG -> {
-                    DialogPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
-                }
-                MODE_BOTTOMSHEET -> {
-                    BottomSheetPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
-                }
-                else -> {
-                    DropdownPopup(context, attrs)
-                }
+                MODE_DIALOG -> DialogPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
+                MODE_BOTTOMSHEET -> BottomSheetPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
+                else -> DropdownPopup(context, attrs)
             }
 
             // Create the color state list.
             //noinspection Recycle
-            colorStateList = context.obtainStyledAttributes(
-                attrs,
-                intArrayOf(R.attr.colorControlActivated, R.attr.colorControlNormal)
-            ).run {
+            colorStateList = context.obtainStyledAttributes(attrs, intArrayOf(R.attr.colorControlActivated, R.attr.colorControlNormal)).run {
                 val activated = getColor(0, 0)
                 @SuppressLint("ResourceType")
                 val normal = getColor(1, 0)
@@ -258,28 +230,25 @@ open class MaterialSpinner @JvmOverloads constructor(
             ).let {
                 setDrawable(it)
             }
-
             recycle()
         }
 
-        this.addView(editText, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
-
         popup.setOnDismissListener(object : SpinnerPopup.OnDismissListener {
             override fun onDismiss() {
-                editText.clearFocus()
+                clearFocus()
             }
         })
 
         // Disable input.
-        editText.maxLines = 1
-        editText.inputType = InputType.TYPE_NULL
+        maxLines = 1
+        inputType = InputType.TYPE_NULL
 
-        editText.setOnClickListener {
-            popup.show(selection)
+        setOnClickListener {
+            popup.show(selected)
         }
 
-        editText.onFocusChangeListener.let {
-            editText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+        onFocusChangeListener.let {
+            onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
                 v.handler.post {
                     if (hasFocus) {
                         v.performClick()
@@ -292,7 +261,7 @@ open class MaterialSpinner @JvmOverloads constructor(
     }
 
     fun setDrawable(drawable: Drawable?, applyTint: Boolean = true) {
-        val delta = (editText.paddingBottom - editText.paddingTop) / 2
+        val delta = (paddingBottom - paddingTop) / 2
         drawable?.let { DrawableCompat.wrap(drawable) }?.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
             if (applyTint) {
@@ -306,8 +275,8 @@ open class MaterialSpinner @JvmOverloads constructor(
                 Pair(null, it)
             }
         }.let { (left, right) ->
-            editText.setCompoundDrawablesWithIntrinsicBounds(left, null, right, null)
-            editText.compoundDrawables.forEach {
+            setCompoundDrawablesWithIntrinsicBounds(left, null, right, null)
+            compoundDrawables.forEach {
                 it?.run {
                     bounds = copyBounds().apply {
                         top += delta
@@ -318,50 +287,14 @@ open class MaterialSpinner @JvmOverloads constructor(
         }
     }
 
-    override fun setOnClickListener(l: OnClickListener?) {
-        throw RuntimeException(
-            "Don't call setOnClickListener." +
-                    "You probably want setOnItemClickListener instead."
-        )
-    }
-
-    /**
-     * Set whether this view can receive the focus.
-     * Setting this to false will also ensure that this view is not focusable in touch mode.
-     *
-     * @param [focusable] If true, this view can receive the focus.
-     *
-     * @see [android.view.View.setFocusableInTouchMode]
-     * @see [android.view.View.setFocusable]
-     * @attr ref android.R.styleable#View_focusable
-     */
-    override fun setFocusable(focusable: Boolean) {
-        editText.isFocusable = focusable
-        super.setFocusable(focusable)
-    }
-
-    /**
-     * Set whether this view can receive focus while in touch mode.
-     * Setting this to true will also ensure that this view is focusable.
-     *
-     * @param [focusableInTouchMode] If true, this view can receive the focus while in touch mode.
-     *
-     * @see [android.view.View.setFocusable]
-     * @attr ref android.R.styleable#View_focusableInTouchMode
-     */
-    override fun setFocusableInTouchMode(focusableInTouchMode: Boolean) {
-        editText.isFocusableInTouchMode = focusableInTouchMode
-        super.setFocusableInTouchMode(focusableInTouchMode)
-    }
-
     /**
      * @see [android.view.View.onRtlPropertiesChanged]
      */
     override fun onRtlPropertiesChanged(layoutDirection: Int) {
         if (direction != layoutDirection) {
             direction = layoutDirection
-            editText.compoundDrawables.let {
-                editText.setCompoundDrawablesWithIntrinsicBounds(it[2], null, it[0], null)
+            compoundDrawables.let {
+                setCompoundDrawablesWithIntrinsicBounds(it[2], null, it[0], null)
             }
         }
         super.onRtlPropertiesChanged(layoutDirection)
@@ -371,7 +304,7 @@ open class MaterialSpinner @JvmOverloads constructor(
         super.setError(errorText)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             findViewById<TextView>(R.id.textinput_error)?.let { errorView ->
-                errorView.gravity = editText.gravity
+                errorView.gravity = gravity
                 when (val p = errorView.parent) {
                     is View -> {
                         p.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -416,7 +349,7 @@ open class MaterialSpinner @JvmOverloads constructor(
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun onSaveInstanceState(): Parcelable? {
         return SavedState(super.onSaveInstanceState()).apply {
-            this.selection = this@MaterialSpinner.selection
+            this.selection = this@MaterialSpinner.selected
             this.isShowingPopup = this@MaterialSpinner.popup.isShowing()
         }
     }
@@ -425,7 +358,7 @@ open class MaterialSpinner @JvmOverloads constructor(
         when (state) {
             is SavedState -> {
                 super.onRestoreInstanceState(state.superState)
-                selection = state.selection
+                selected = state.selection
                 if (state.isShowingPopup) {
                     viewTreeObserver?.addOnGlobalLayoutListener(object :
                         ViewTreeObserver.OnGlobalLayoutListener {
@@ -530,7 +463,7 @@ open class MaterialSpinner @JvmOverloads constructor(
         }
 
         override fun onClick(dialog: DialogInterface, which: Int) {
-            this@MaterialSpinner.selection = which
+            this@MaterialSpinner.selected = which
             onItemClickListener?.let {
                 this@MaterialSpinner.performItemClick(null, which, adapter?.getItemId(which) ?: 0L)
             }
@@ -567,7 +500,7 @@ open class MaterialSpinner @JvmOverloads constructor(
             setOverlapAnchor(false)
 
             setOnItemClickListener { parent, v, position, id ->
-                this@MaterialSpinner.selection = position
+                this@MaterialSpinner.selected = position
                 onItemClickListener?.let {
                     this@MaterialSpinner.performItemClick(
                         v,
@@ -647,7 +580,7 @@ open class MaterialSpinner @JvmOverloads constructor(
 
                     onItemClickListener =
                         AdapterView.OnItemClickListener { parent, v, position, id ->
-                            this@MaterialSpinner.selection = position
+                            this@MaterialSpinner.selected = position
                             onItemClickListener?.let {
                                 this@MaterialSpinner.performItemClick(
                                     v,

@@ -229,12 +229,18 @@
 				android:layout_height="wrap_content"
 				android:text="Validate &amp; throw"/>
 
-		<com.inlacou.exinput.MaterialSpinner
-				android:id="@+id/spinner"
+		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				app:prefixText="prefix"
-				app:suffixText="suffix"/>
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.MaterialSpinner
+					android:id="@+id/spinner"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:prefixText="prefix"
+					app:suffixText="suffix"/>
+		</com.google.android.material.textfield.TextInputLayout>
 
 		<View
 				android:layout_width="match_parent"
