@@ -233,14 +233,14 @@
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:prefixText="prefix"
+				app:suffixText="suffix"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
 			<com.inlacou.exinput.spinner.MaterialSpinner
 					android:id="@+id/spinner"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					app:prefixText="prefix"
-					app:suffixText="suffix"/>
+					android:layout_height="wrap_content"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<View
