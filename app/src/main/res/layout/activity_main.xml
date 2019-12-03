@@ -229,6 +229,17 @@
 				android:layout_height="wrap_content"
 				android:text="Validate &amp; throw"/>
 
+		<com.inlacou.exinput.MaterialSpinner
+				android:id="@+id/spinner"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:prefixText="prefix"
+				app:suffixText="suffix"/>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="200dp"/>
+
 	</LinearLayout>
 
 </ScrollView>

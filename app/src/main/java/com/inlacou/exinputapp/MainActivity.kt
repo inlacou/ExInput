@@ -1,9 +1,12 @@
 package com.inlacou.exinputapp
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.inlacou.exinput.MaterialSpinner
 import com.inlacou.exinput.exceptions.InvalidException
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 	var phone: PhoneInput? = null
 	var etOnlyEditableThroughDrawables: PhoneInput? = null
 	var etTrigger: TriggerInput? = null
+	var spinner: MaterialSpinner? = null
 
 	var button: Button? = null
 	var buttonThrow: Button? = null
@@ -64,8 +68,11 @@ class MainActivity : AppCompatActivity() {
 		phone = findViewById(R.id.phone)
 		etOnlyEditableThroughDrawables = findViewById(R.id.et_only_editable_through_drawables)
 		etTrigger = findViewById(R.id.et_trigger)
+		spinner = findViewById(R.id.spinner)
 
 		button = findViewById(R.id.validate)
+
+		spinner?.adapter = ArrayAdapter(this, R.layout.common_simple_list_item, listOf("a", "b", "c"))
 
 		button?.setOnClickListener {
 			text?.isValid()
