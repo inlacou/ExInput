@@ -24,17 +24,17 @@
         <attr name="maxDecimals" format="integer"/>
     </declare-styleable>
     <declare-styleable name="MaterialSpinner">
-        <attr name="android:enabled" />
+        <attr name="android:enabled" /> <!-- works -->
         <attr name="android:focusable" />
         <attr name="android:focusableInTouchMode" />
-        <attr name="android:prompt" />
-        <attr name="android:src" />
-        <attr name="android:textColor" />
-        <attr name="android:textSize" />
-        <attr name="android:text" />
-        <attr name="android:gravity" />
-        <attr name="srcCompat" />
-        <attr name="spinnerMode" format="enum">
+        <attr name="android:prompt" /> <!-- NOT WORKING -->
+        <attr name="android:src" /> <!-- For drop down icon --> <!-- works -->
+        <attr name="android:textColor" /> <!-- works -->
+        <attr name="android:textSize" /> <!-- works -->
+        <attr name="android:text" /> <!-- works (use only with tools namespace) -->
+        <attr name="android:gravity" /> <!-- works -->
+        <attr name="srcCompat" /> <!-- For drop down icon --> <!-- works -->
+        <attr name="spinnerMode" format="enum"> <!-- works -->
             <enum name="dialog" value="0" />
             <enum name="dropdown" value="1" />
             <enum name="bottomsheet" value="2" />
