@@ -11,25 +11,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
-		<Spinner
-				android:id="@+id/spinner"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:clickable="true"
-				android:focusable="true"
-				android:spinnerMode="dropdown"
-				android:textColor="@color/exinput_basic_black"
-				android:padding="@dimen/general_all"/>
-		<androidx.appcompat.widget.AppCompatSpinner
-				android:id="@+id/spinner_appcompat"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:clickable="true"
-				android:focusable="true"
-				android:spinnerMode="dropdown"
-				android:textColor="@color/exinput_basic_black"
-				android:padding="@dimen/general_all"/>
-
 		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -205,7 +186,7 @@
 
 		<!-- The style on this element needs the app theme inherit from
 		Theme.MaterialComponents like Theme.MaterialComponents.Light.DarkActionBar -->
-		<!--<com.google.android.material.textfield.TextInputLayout
+		<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
@@ -254,7 +235,7 @@
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
-			<com.inlacou.exinput.MaterialSpinner
+			<com.inlacou.exinput.spinner.MaterialSpinner
 					android:id="@+id/spinner"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

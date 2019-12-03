@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ExInput.iml" filepath="$PROJECT_DIR$/.idea/ExInput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/ExInput-app.iml" filepath="$PROJECT_DIR$/app/ExInput-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exinput/ExInput-exinput.iml" filepath="$PROJECT_DIR$/exinput/ExInput-exinput.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/exinput/exinput.iml" filepath="$PROJECT_DIR$/exinput/exinput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repositories-ExInput.iml" filepath="$PROJECT_DIR$/repositories-ExInput.iml" />
     </modules>
   </component>
 </project>

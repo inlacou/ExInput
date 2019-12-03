@@ -3,10 +3,9 @@ package com.inlacou.exinputapp
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.inlacou.exinput.MaterialSpinner
+import com.inlacou.exinput.spinner.MaterialSpinner
 import com.inlacou.exinput.exceptions.InvalidException
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
@@ -22,7 +21,6 @@ import com.inlacou.exinput.free.trigger.TriggerInput
 import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
-import com.inlacou.exinput.utils.extensions.checkNotEmpty
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers

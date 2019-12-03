@@ -1,4 +1,4 @@
-package com.inlacou.exinput
+package com.inlacou.exinput.spinner
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -14,6 +14,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.text.InputType
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.SoundEffectConstants
 import android.view.View
@@ -37,6 +38,8 @@ import androidx.customview.view.AbsSavedState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.inlacou.exinput.R
+import timber.log.Timber
 import java.util.Locale
 
 /**
@@ -205,7 +208,10 @@ open class MaterialSpinner @JvmOverloads constructor(
 
             // Create the color state list.
             //noinspection Recycle
-            colorStateList = context.obtainStyledAttributes(attrs, intArrayOf(R.attr.colorControlActivated, R.attr.colorControlNormal)).run {
+            colorStateList = context.obtainStyledAttributes(attrs, intArrayOf(
+                R.attr.colorControlActivated,
+                R.attr.colorControlNormal
+            )).run {
                 val activated = getColor(0, 0)
                 @SuppressLint("ResourceType")
                 val normal = getColor(1, 0)
@@ -233,7 +239,8 @@ open class MaterialSpinner @JvmOverloads constructor(
             recycle()
         }
 
-        popup.setOnDismissListener(object : SpinnerPopup.OnDismissListener {
+        popup.setOnDismissListener(object :
+            SpinnerPopup.OnDismissListener {
             override fun onDismiss() {
                 clearFocus()
             }
@@ -244,17 +251,21 @@ open class MaterialSpinner @JvmOverloads constructor(
         inputType = InputType.TYPE_NULL
 
         setOnClickListener {
+            Timber.d("inlakou | onClickListener | call .show")
             popup.show(selected)
         }
 
         onFocusChangeListener.let {
+            Timber.d("inlakou | onFocusChangeListener | let")
             onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+                Timber.d("inlakou | onFocusChangeListener | fired | hasFocus: $hasFocus")
                 v.handler.post {
+                    Timber.d("inlakou | onFocusChangeListener | handler | fired")
                     if (hasFocus) {
                         v.performClick()
                     }
-                    it?.onFocusChange(v, hasFocus)
-                    onFocusChangeListener?.onFocusChange(this, hasFocus)
+                    //it?.onFocusChange(v, hasFocus)
+                    //onFocusChangeListener?.onFocusChange(this, hasFocus)
                 }
             }
         }
@@ -363,6 +374,7 @@ open class MaterialSpinner @JvmOverloads constructor(
                     viewTreeObserver?.addOnGlobalLayoutListener(object :
                         ViewTreeObserver.OnGlobalLayoutListener {
                         override fun onGlobalLayout() {
+                            Timber.d("inlakou | onGlobalLayout")
                             if (!popup.isShowing()) {
                                 requestFocus()
                             }
@@ -493,6 +505,7 @@ open class MaterialSpinner @JvmOverloads constructor(
         ListPopupWindow(context, attrs), SpinnerPopup {
 
         init {
+            Timber.d("inlakou | init | start")
             inputMethodMode = INPUT_METHOD_NOT_NEEDED
             anchorView = this@MaterialSpinner
             isModal = true
@@ -510,10 +523,12 @@ open class MaterialSpinner @JvmOverloads constructor(
                 }
                 dismiss()
             }
+            Timber.d("inlakou | init | end")
         }
 
         override fun show(position: Int) {
             super.show()
+            Timber.d("inlakou | show | start")
             listView?.let {
                 it.choiceMode = ListView.CHOICE_MODE_SINGLE
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
@@ -522,12 +537,17 @@ open class MaterialSpinner @JvmOverloads constructor(
                 }
             }
             setSelection(position)
+            Timber.d("inlakou | show | end")
         }
 
         override fun setOnDismissListener(listener: SpinnerPopup.OnDismissListener?) {
+            Timber.d("inlakou | onDismissListener | start 1")
             super.setOnDismissListener {
+                Timber.d("inlakou | onDismissListener | start 2")
                 listener?.onDismiss()
+                Timber.d("inlakou | onDismissListener | end 1")
             }
+            Timber.d("inlakou | onDismissListener | end 2")
         }
 
         override fun setPromptText(hintText: CharSequence?) = Unit
@@ -631,7 +651,6 @@ open class MaterialSpinner @JvmOverloads constructor(
         private val listAdapter: ListAdapter?
 
         init {
-
             listAdapter = when (val it = adapter) {
                 is ListAdapter -> it
                 else -> null
