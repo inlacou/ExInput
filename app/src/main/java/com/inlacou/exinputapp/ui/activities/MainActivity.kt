@@ -1,7 +1,6 @@
-package com.inlacou.exinputapp
+package com.inlacou.exinputapp.ui.activities
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +22,9 @@ import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
+import com.inlacou.exinputapp.R
+import com.inlacou.exinputapp.adapters.ColorArrayAdapter
+import com.inlacou.exinputapp.ui.views.ColorSimpleViewMdl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -70,7 +72,8 @@ class MainActivity : AppCompatActivity() {
 
 		button = findViewById(R.id.validate)
 
-		spinner?.adapter = ArrayAdapter(this, R.layout.common_simple_list_item, listOf("a", "b", "c"))
+		//spinner?.adapter = ArrayAdapter(this, R.layout.common_simple_list_item, listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "ñ", "o", "p", "q", "r", "s", "t", "u"))
+		spinner?.adapter = ColorArrayAdapter(this, listOf(ColorSimpleViewMdl("blue", R.color.basic_blue), ColorSimpleViewMdl("green", R.color.basic_green)))
 
 		button?.setOnClickListener {
 			text?.isValid()

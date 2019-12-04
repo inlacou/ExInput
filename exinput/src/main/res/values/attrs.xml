@@ -27,7 +27,7 @@
         <attr name="android:enabled" /> <!-- works -->
         <attr name="android:focusable" />
         <attr name="android:focusableInTouchMode" />
-        <attr name="android:prompt" /> <!-- NOT WORKING -->
+        <attr name="android:prompt" /> <!-- working only on dialog mode -->
         <attr name="android:src" /> <!-- For drop down icon --> <!-- works -->
         <attr name="android:textColor" /> <!-- works -->
         <attr name="android:textSize" /> <!-- works -->

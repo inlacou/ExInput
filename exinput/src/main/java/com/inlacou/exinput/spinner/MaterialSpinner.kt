@@ -1,12 +1,9 @@
 package com.inlacou.exinput.spinner
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.database.DataSetObserver
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -14,70 +11,34 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.text.InputType
 import android.util.AttributeSet
-import android.util.Log
-import android.view.Gravity
-import android.view.SoundEffectConstants
-import android.view.View
+import android.view.*
 import android.view.View.OnFocusChangeListener
-import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.accessibility.AccessibilityEvent
-import android.widget.ListAdapter
-import android.widget.ListView
 import android.widget.SpinnerAdapter
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.ListPopupWindow
-import androidx.appcompat.widget.ThemedSpinnerAdapter
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.text.TextUtilsCompat
 import androidx.core.view.ViewCompat
 import androidx.customview.view.AbsSavedState
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.R
 import timber.log.Timber
-import java.util.Locale
+import java.util.*
 
 /**
- * Layout which wraps an [TextInputEditText] to show a floating label when the hint is hidden due to
- * the user inputting text.
+ * [TextInputEditText] as spinner.
  *
- * @see [TextInputLayout]
- * @author Tiago Pereira (tiagomiguelmoreirapereira@gmail.com)
+ * @see [TextInputEditText]
+ * original @author Tiago Pereira (tiagomiguelmoreirapereira@gmail.com)
+ * current @author Inlacou (inlacou@gmail.com)
  */
 open class MaterialSpinner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    mode: Int = MODE_DROPDOWN
+    mode: Mode = Mode.MODE_DROPDOWN
 ) : TextInputEditText(context, attrs) {
-
-    companion object {
-        /**
-         * Represents an invalid position.
-         * All valid positions are in the range 0 to 1 less than the number of items in the current
-         * adapter.
-         */
-        const val INVALID_POSITION = -1
-
-        /**
-         * Use a dialog window for selecting spinner options.
-         */
-        const val MODE_DIALOG = 0
-
-        /**
-         * Use a dropdown anchored to the Spinner for selecting spinner options.
-         */
-        const val MODE_DROPDOWN = 1
-
-        /**
-         * Use a bottom sheet dialog window for selecting spinner options.
-         */
-        const val MODE_BOTTOMSHEET = 2
-    }
 
     private val colorStateList: ColorStateList
 
@@ -111,13 +72,12 @@ open class MaterialSpinner @JvmOverloads constructor(
      * {@link #LAYOUT_DIRECTION_RTL} if the layout direction is RTL.
      * {@link #LAYOUT_DIRECTION_LTR} if the layout direction is not RTL.
      */
-    private var direction =
-        if (isLayoutRtl()) ViewCompat.LAYOUT_DIRECTION_RTL else ViewCompat.LAYOUT_DIRECTION_LTR
+    private var direction = if (isLayoutRtl()) ViewCompat.LAYOUT_DIRECTION_RTL else ViewCompat.LAYOUT_DIRECTION_LTR
 
     /**
      * The currently selected item.
      */
-    var selected = INVALID_POSITION
+    var selected = -1
         set(value) {
             field = value
             adapter?.apply {
@@ -155,15 +115,13 @@ open class MaterialSpinner @JvmOverloads constructor(
      * @return The data corresponding to the currently selected item, or null if there is nothing
      * selected.
      */
-    val selectedItem: Any?
-        get() = popup.getItem(selected)
+    val selectedItem get() = popup.getItem(selected)
 
     /**
      * @return The id corresponding to the currently selected item, or {@link #INVALID_ROW_ID} if
      * nothing is selected.
      */
-    val selectedItemId: Long
-        get() = popup.getItemId(selected)
+    val selectedItemId get() = popup.getItemId(selected)
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.MaterialSpinner).run {
@@ -200,10 +158,10 @@ open class MaterialSpinner @JvmOverloads constructor(
                     )
                 }
             }
-            popup = when (getInt(R.styleable.MaterialSpinner_spinnerMode, mode)) {
-                MODE_DIALOG -> DialogPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
-                MODE_BOTTOMSHEET -> BottomSheetPopup(context, getString(R.styleable.MaterialSpinner_android_prompt))
-                else -> DropdownPopup(context, attrs)
+            popup = when (Mode.values()[getInt(R.styleable.MaterialSpinner_spinnerMode, mode.ordinal)]) {
+                Mode.MODE_DIALOG -> DialogPopup(context, getString(R.styleable.MaterialSpinner_android_prompt), this@MaterialSpinner)
+                Mode.MODE_BOTTOM_SHEET -> BottomSheetPopup(context, getString(R.styleable.MaterialSpinner_android_prompt), this@MaterialSpinner)
+                else -> DropdownPopup(context, attrs, this@MaterialSpinner)
             }
 
             // Create the color state list.
@@ -264,8 +222,6 @@ open class MaterialSpinner @JvmOverloads constructor(
                     if (hasFocus) {
                         v.performClick()
                     }
-                    //it?.onFocusChange(v, hasFocus)
-                    //onFocusChangeListener?.onFocusChange(this, hasFocus)
                 }
             }
         }
@@ -428,321 +384,6 @@ open class MaterialSpinner @JvmOverloads constructor(
         return ResourcesCompat.getDrawable(this, id, theme)?.let { DrawableCompat.wrap(it) }
     }
 
-    private inner class DialogPopup(
-        val context: Context,
-        private var prompt: CharSequence? = null
-    ) : DialogInterface.OnClickListener, SpinnerPopup {
-
-        private var popup: AlertDialog? = null
-        private var adapter: ListAdapter? = null
-        private var listener: SpinnerPopup.OnDismissListener? = null
-
-        override fun setAdapter(adapter: ListAdapter?) {
-            this.adapter = adapter
-        }
-
-        override fun setPromptText(hintText: CharSequence?) {
-            prompt = hintText
-        }
-
-        override fun getPrompt(): CharSequence? {
-            return prompt
-        }
-
-        override fun show(position: Int) {
-            if (adapter == null) {
-                return
-            }
-
-            popup = adapter?.let { adapter ->
-                AlertDialog.Builder(context).let { builder ->
-                    prompt?.let { prompt ->
-                        builder.setTitle(prompt)
-                    }
-                    builder.setSingleChoiceItems(adapter, position, this).create().apply {
-                        popup?.listView?.let {
-                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                                it.textDirection = textDirection
-                                it.textAlignment = textAlignment
-                            }
-                        }
-                        setOnDismissListener { listener?.onDismiss() }
-                    }
-                }.also {
-                    it.show()
-                }
-            }
-        }
-
-        override fun onClick(dialog: DialogInterface, which: Int) {
-            this@MaterialSpinner.selected = which
-            onItemClickListener?.let {
-                this@MaterialSpinner.performItemClick(null, which, adapter?.getItemId(which) ?: 0L)
-            }
-            popup?.dismiss()
-        }
-
-        override fun setOnDismissListener(listener: SpinnerPopup.OnDismissListener?) {
-            this.listener = listener
-        }
-
-        override fun getItem(position: Int): Any? {
-            return adapter?.getItem(position)
-        }
-
-        override fun getItemId(position: Int): Long {
-            return adapter?.getItemId(position) ?: INVALID_POSITION.toLong()
-        }
-
-        override fun isShowing() = popup?.isShowing == true
-    }
-
-    /**
-     * A PopupWindow that anchors itself to a host view and displays a list of choices.
-     */
-    @SuppressLint("RestrictedApi")
-    private inner class DropdownPopup(context: Context, attrs: AttributeSet?) :
-        ListPopupWindow(context, attrs), SpinnerPopup {
-
-        init {
-            Timber.d("inlakou | init | start")
-            inputMethodMode = INPUT_METHOD_NOT_NEEDED
-            anchorView = this@MaterialSpinner
-            isModal = true
-            promptPosition = POSITION_PROMPT_ABOVE
-            setOverlapAnchor(false)
-
-            setOnItemClickListener { parent, v, position, id ->
-                this@MaterialSpinner.selected = position
-                onItemClickListener?.let {
-                    this@MaterialSpinner.performItemClick(
-                        v,
-                        position,
-                        adapter?.getItemId(position) ?: 0L
-                    )
-                }
-                dismiss()
-            }
-            Timber.d("inlakou | init | end")
-        }
-
-        override fun show(position: Int) {
-            super.show()
-            Timber.d("inlakou | show | start")
-            listView?.let {
-                it.choiceMode = ListView.CHOICE_MODE_SINGLE
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                    it.textDirection = textDirection
-                    it.textAlignment = textAlignment
-                }
-            }
-            setSelection(position)
-            Timber.d("inlakou | show | end")
-        }
-
-        override fun setOnDismissListener(listener: SpinnerPopup.OnDismissListener?) {
-            Timber.d("inlakou | onDismissListener | start 1")
-            super.setOnDismissListener {
-                Timber.d("inlakou | onDismissListener | start 2")
-                listener?.onDismiss()
-                Timber.d("inlakou | onDismissListener | end 1")
-            }
-            Timber.d("inlakou | onDismissListener | end 2")
-        }
-
-        override fun setPromptText(hintText: CharSequence?) = Unit
-
-        override fun getPrompt(): CharSequence? {
-            return null
-        }
-
-        override fun getItem(position: Int): Any? {
-            return adapter?.getItem(position)
-        }
-
-        override fun getItemId(position: Int): Long {
-            return adapter?.getItemId(position) ?: INVALID_POSITION.toLong()
-        }
-    }
-
-    private inner class BottomSheetPopup(
-        val context: Context,
-        private var prompt: CharSequence? = null
-    ) : SpinnerPopup {
-
-        private var popup: BottomSheetDialog? = null
-        private var adapter: ListAdapter? = null
-        private var listener: SpinnerPopup.OnDismissListener? = null
-
-        override fun setAdapter(adapter: ListAdapter?) {
-            this.adapter = adapter
-        }
-
-        override fun setPromptText(hintText: CharSequence?) {
-            prompt = hintText
-        }
-
-        override fun getPrompt(): CharSequence? {
-            return prompt
-        }
-
-        override fun show(position: Int) {
-            if (adapter == null) {
-                return
-            }
-
-            popup = BottomSheetDialog(context).apply {
-                prompt?.let { prompt ->
-                    setTitle(prompt)
-                }
-                setContentView(ListView(context).apply {
-                    adapter = this@BottomSheetPopup.adapter
-
-                    onItemClickListener =
-                        AdapterView.OnItemClickListener { parent, v, position, id ->
-                            this@MaterialSpinner.selected = position
-                            onItemClickListener?.let {
-                                this@MaterialSpinner.performItemClick(
-                                    v,
-                                    position,
-                                    adapter?.getItemId(position) ?: 0L
-                                )
-                            }
-                            dismiss()
-                        }
-                })
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                    textDirection = this@MaterialSpinner.textDirection
-                    textAlignment = this@MaterialSpinner.textAlignment
-                }
-                setOnDismissListener { listener?.onDismiss() }
-            }.also {
-                it.show()
-            }
-        }
-
-        override fun setOnDismissListener(listener: SpinnerPopup.OnDismissListener?) {
-            this.listener = listener
-        }
-
-        override fun getItem(position: Int): Any? {
-            return adapter?.getItem(position)
-        }
-
-        override fun getItemId(position: Int): Long {
-            return adapter?.getItemId(position) ?: INVALID_POSITION.toLong()
-        }
-
-        override fun isShowing() = popup?.isShowing == true
-    }
-
-    /**
-     * Creates a new ListAdapter wrapper for the specified adapter.
-     *
-     * @param [adapter] The SpinnerAdapter to transform into a ListAdapter.
-     * @param [dropDownTheme] The theme against which to inflate drop-down views, may be {@null}
-     * to use default theme.
-     */
-    private inner class DropDownAdapter(
-        private val adapter: SpinnerAdapter?,
-        dropDownTheme: Resources.Theme?
-    ) : ListAdapter, SpinnerAdapter {
-
-        private val listAdapter: ListAdapter?
-
-        init {
-            listAdapter = when (val it = adapter) {
-                is ListAdapter -> it
-                else -> null
-            }
-
-            dropDownTheme?.let {
-                when (adapter) {
-                    is ThemedSpinnerAdapter -> {
-                        if (adapter.dropDownViewTheme != it) {
-                            adapter.dropDownViewTheme = it
-                        }
-                    }
-                    else -> {
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                            when (adapter) {
-                                is android.widget.ThemedSpinnerAdapter -> {
-                                    if (adapter.dropDownViewTheme == null) {
-                                        adapter.dropDownViewTheme = it
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        override fun getCount(): Int {
-            return adapter?.count ?: 0
-        }
-
-        override fun getItem(position: Int): Any? {
-            return adapter?.let {
-                if (position > INVALID_POSITION && position < it.count) it.getItem(
-                    position
-                ) else null
-            }
-        }
-
-        override fun getItemId(position: Int): Long {
-            return adapter?.getItemId(position) ?: INVALID_POSITION.toLong()
-        }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
-            return getDropDownView(position, convertView, parent)
-        }
-
-        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
-            return adapter?.getDropDownView(position, convertView, parent)
-        }
-
-        override fun hasStableIds(): Boolean {
-            return adapter?.hasStableIds() ?: false
-        }
-
-        override fun registerDataSetObserver(observer: DataSetObserver) {
-            adapter?.registerDataSetObserver(observer)
-        }
-
-        override fun unregisterDataSetObserver(observer: DataSetObserver) {
-            adapter?.unregisterDataSetObserver(observer)
-        }
-
-        /**
-         * If the wrapped SpinnerAdapter is also a ListAdapter, delegate this call. Otherwise,
-         * return true.
-         */
-        override fun areAllItemsEnabled(): Boolean {
-            return listAdapter?.areAllItemsEnabled() ?: true
-        }
-
-        /**
-         * If the wrapped SpinnerAdapter is also a ListAdapter, delegate this call. Otherwise,
-         * return true.
-         */
-        override fun isEnabled(position: Int): Boolean {
-            return listAdapter?.isEnabled(position) ?: true
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            return 0
-        }
-
-        override fun getViewTypeCount(): Int {
-            return 1
-        }
-
-        override fun isEmpty(): Boolean {
-            return count == 0
-        }
-    }
-
     /**
      * Interface for a callback to be invoked when an item in this view has been selected.
      */
@@ -790,80 +431,8 @@ open class MaterialSpinner @JvmOverloads constructor(
         fun onItemClick(parent: MaterialSpinner, view: View?, position: Int, id: Long)
     }
 
-    /**
-     * Implements some sort of popup selection interface for selecting a spinner option.
-     * Allows for different spinner modes.
-     */
-    private interface SpinnerPopup {
-
-        /**
-         * Listener that is called when this popup window is dismissed.
-         */
-        interface OnDismissListener {
-            /**
-             * Called when this popup window is dismissed.
-             */
-            fun onDismiss()
-        }
-
-        /**
-         * Set hint text to be displayed to the user. This should provide a description of the
-         * choice being made.
-         *
-         * @param [hintText] Hint text to set.
-         */
-        fun setPromptText(hintText: CharSequence?)
-
-        /**
-         * @return The prompt to display when the dialog is shown
-         */
-        fun getPrompt(): CharSequence?
-
-        /**
-         * Sets the adapter that provides the data and the views to represent the data in this popup
-         * window.
-         *
-         * @param [adapter] The adapter to use to create this window's content.
-         */
-        fun setAdapter(adapter: ListAdapter?)
-
-        /**
-         * Show the popup
-         */
-        fun show(position: Int)
-
-        /**
-         * Set a listener to receive a callback when the popup is dismissed.
-         *
-         * @param [listener] Listener that will be notified when the popup is dismissed.
-         */
-        fun setOnDismissListener(listener: OnDismissListener?)
-
-        /**
-         * Get the data item associated with the specified position in the data set.
-         *
-         * @param [position] Position of the item whose data we want within the adapter's data set.
-         * @return The data at the specified position.
-         */
-        fun getItem(position: Int): Any?
-
-        /**
-         * Get the row id associated with the specified position in the list.
-         *
-         * @param [position] The position of the item within the adapter's data set whose row id we
-         * want.
-         * @return The id of the item at the specified position.
-         */
-        fun getItemId(position: Int): Long
-
-        /**
-         * @return true if the popup is showing, false otherwise.
-         */
-        fun isShowing(): Boolean
-    }
-
     internal class SavedState : AbsSavedState {
-        var selection: Int = INVALID_POSITION
+        var selection: Int = -1
         var isShowingPopup: Boolean = false
 
         constructor(superState: Parcelable) : super(superState)
@@ -904,4 +473,20 @@ open class MaterialSpinner @JvmOverloads constructor(
             }
         }
     }
+
+    enum class Mode {
+        /**
+         * Use a dialog window for selecting spinner options.
+         */
+        MODE_DIALOG,
+        /**
+         * Use a dropdown anchored to the Spinner for selecting spinner options.
+         */
+        MODE_DROPDOWN,
+        /**
+         * Use a bottom sheet dialog window for selecting spinner options.
+         */
+        MODE_BOTTOM_SHEET
+    }
+
 }
