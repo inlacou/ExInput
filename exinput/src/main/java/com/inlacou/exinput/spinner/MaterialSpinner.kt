@@ -24,6 +24,10 @@ import androidx.core.view.ViewCompat
 import androidx.customview.view.AbsSavedState
 import com.google.android.material.textfield.TextInputEditText
 import com.inlacou.exinput.R
+import com.inlacou.exinput.spinner.popups.BottomSheetPopup
+import com.inlacou.exinput.spinner.popups.DialogPopup
+import com.inlacou.exinput.spinner.popups.DropDownAdapter
+import com.inlacou.exinput.spinner.popups.DropdownPopup
 import timber.log.Timber
 import java.util.*
 
@@ -159,9 +163,21 @@ open class MaterialSpinner @JvmOverloads constructor(
                 }
             }
             popup = when (Mode.values()[getInt(R.styleable.MaterialSpinner_spinnerMode, mode.ordinal)]) {
-                Mode.MODE_DIALOG -> DialogPopup(context, getString(R.styleable.MaterialSpinner_android_prompt), this@MaterialSpinner)
-                Mode.MODE_BOTTOM_SHEET -> BottomSheetPopup(context, getString(R.styleable.MaterialSpinner_android_prompt), this@MaterialSpinner)
-                else -> DropdownPopup(context, attrs, this@MaterialSpinner)
+                Mode.MODE_DIALOG -> DialogPopup(
+                    context,
+                    getString(R.styleable.MaterialSpinner_android_prompt),
+                    this@MaterialSpinner
+                )
+                Mode.MODE_BOTTOM_SHEET -> BottomSheetPopup(
+                    context,
+                    getString(R.styleable.MaterialSpinner_android_prompt),
+                    this@MaterialSpinner
+                )
+                else -> DropdownPopup(
+                    context,
+                    attrs,
+                    this@MaterialSpinner
+                )
             }
 
             // Create the color state list.

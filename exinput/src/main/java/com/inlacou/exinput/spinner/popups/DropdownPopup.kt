@@ -1,4 +1,4 @@
-package com.inlacou.exinput.spinner
+package com.inlacou.exinput.spinner.popups
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,8 @@ import android.os.Build
 import android.util.AttributeSet
 import android.widget.ListView
 import androidx.appcompat.widget.ListPopupWindow
+import com.inlacou.exinput.spinner.MaterialSpinner
+import com.inlacou.exinput.spinner.SpinnerPopup
 
 /**
  * A PopupWindow that anchors itself to a host view and displays a list of choices.

@@ -1,10 +1,12 @@
-package com.inlacou.exinput.spinner
+package com.inlacou.exinput.spinner.popups
 
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.widget.ListAdapter
+import com.inlacou.exinput.spinner.MaterialSpinner
+import com.inlacou.exinput.spinner.SpinnerPopup
 
 internal class DialogPopup(
     val context: Context,
