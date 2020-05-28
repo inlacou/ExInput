@@ -3,9 +3,7 @@ package com.inlacou.exinput.rx
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
-import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
-import com.inlacou.exinput.free.numeric.NumberInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.exinput.rx.input.DateTimeInputObs
@@ -13,7 +11,7 @@ import com.inlacou.exinput.rx.input.DoubleChangeObs
 import com.inlacou.exinput.rx.input.LongChangeObs
 import com.inlacou.exinput.rx.input.TextChangeObs
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 /* Utils */

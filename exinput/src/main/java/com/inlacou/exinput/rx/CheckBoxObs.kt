@@ -1,9 +1,8 @@
 package com.inlacou.exinput.rx
 
 import android.widget.CheckBox
-
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 
 class CheckBoxObs constructor(private val checkBox: CheckBox) : ObservableOnSubscribe<Boolean> {
 	@Throws(Exception::class)
