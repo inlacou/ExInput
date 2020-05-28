@@ -25,7 +25,7 @@ import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.Touch
 import com.inlacou.exinputapp.R
 import com.inlacou.exinputapp.adapters.ColorArrayAdapter
 import com.inlacou.exinputapp.ui.views.ColorSimpleViewMdl
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

@@ -2,11 +2,9 @@ package com.inlacou.exinput.rx.input
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.TextView
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
-
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 
 class DoubleChangeObs constructor(private val view: DoubleInput) : ObservableOnSubscribe<Double> {
 

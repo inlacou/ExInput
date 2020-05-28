@@ -331,7 +331,7 @@ open class MaterialSpinner @JvmOverloads constructor(
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun onSaveInstanceState(): Parcelable? {
-        return SavedState(super.onSaveInstanceState()).apply {
+        return SavedState(super.onSaveInstanceState()!!).apply {
             this.selection = this@MaterialSpinner.selected
             this.isShowingPopup = this@MaterialSpinner.popup.isShowing()
         }

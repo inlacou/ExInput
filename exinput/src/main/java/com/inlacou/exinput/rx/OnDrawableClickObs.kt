@@ -1,11 +1,9 @@
 package com.inlacou.exinput.rx
 
 import android.view.View
-import android.widget.Toast
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
-
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 
 class OnDrawableClickObs constructor(private val view: View) : ObservableOnSubscribe<OnTextViewDrawableTouchListener.TouchTarget> {
 	@Throws(Exception::class)
