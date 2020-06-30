@@ -10,6 +10,7 @@ import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.datetime.TimeInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
+import com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
 import com.inlacou.exinput.free.text.TextInput
 import com.inlacou.exinput.free.text.email.EmailInput
 import com.inlacou.exinput.free.text.password.PasswordInput
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 	var phone: PhoneInput? = null
 	var etOnlyEditableThroughDrawables: PhoneInput? = null
 	var etTrigger: TriggerInput? = null
+	var eiSpinnerDialog: DialogSpinnerInput? = null
 
 	var button: Button? = null
 	var buttonThrow: Button? = null
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 			}
 		})
 		etOnlyEditableThroughDrawables?.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-			Toast.makeText(this@MainActivity, when(it){
+			Toast.makeText(this@MainActivity, when(it) {
 				RIGHT -> { etOnlyEditableThroughDrawables?.text = "add"; "add" }
 				LEFT -> { etOnlyEditableThroughDrawables?.text = "substract"; "substract" }
 			}, Toast.LENGTH_SHORT).show()

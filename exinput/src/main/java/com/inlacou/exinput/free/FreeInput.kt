@@ -10,7 +10,7 @@ import timber.log.Timber
 /**
  * Created by inlacou on 14/06/17.
  */
-abstract class FreeInput : BaseInput {
+abstract class FreeInput: BaseInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }

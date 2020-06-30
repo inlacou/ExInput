@@ -217,6 +217,19 @@
 					android:hint="trigger"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
+					android:id="@+id/ei_spinner_dialog"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					android:hint="spinner- dialog"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
 		<Button
 				android:id="@+id/validate"
 				android:layout_width="match_parent"
