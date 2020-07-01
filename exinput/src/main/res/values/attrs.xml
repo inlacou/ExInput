@@ -23,4 +23,6 @@
         <attr name="maxIntegers" format="integer"/>
         <attr name="maxDecimals" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="DialogSpinnerInput">
+    </declare-styleable>
 </resources>

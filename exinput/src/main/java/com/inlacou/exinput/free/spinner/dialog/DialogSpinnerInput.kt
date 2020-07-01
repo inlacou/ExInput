@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.AttributeSet
 import com.inlacou.exinput.free.spinner.SpinnerInput
-import timber.log.Timber
 
 /**
  * Created by inlacou on 14/06/17.
@@ -24,13 +23,11 @@ open class DialogSpinnerInput : SpinnerInput {
 	override fun openInput() {
 		val builderSingle: AlertDialog.Builder = AlertDialog.Builder(context)
 		//builderSingle.setIcon(R.drawable.ic_launcher)
-		builderSingle.setTitle("Select One Name:")
+		//builderSingle.setTitle("Select One Name:")
 
-		builderSingle.setNegativeButton("cancel") { dialog, which ->
+		/*builderSingle.setNegativeButton("cancel") { dialog, which ->
 			dialog.dismiss()
-		}
-
-		Timber.d("adapter: $adapter")
+		}*/
 
 		builderSingle.setAdapter(adapter) { dialog, which ->
 			text = adapter?.getItem(which)?.toString() ?: ""

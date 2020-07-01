@@ -5,16 +5,12 @@ import android.text.Editable
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputLayout
 import com.inlacou.exinput.R
-import com.inlacou.exinput.exceptions.InvalidException
 import com.inlacou.exinput.exceptions.reasons.AboveMaxLength
 import com.inlacou.exinput.exceptions.reasons.BelowMinLength
 import com.inlacou.exinput.exceptions.reasons.Reason
-import com.inlacou.exinput.exceptions.reasons.Required
 import com.inlacou.exinput.utils.extensions.checkMaxLength
 import com.inlacou.exinput.utils.extensions.checkMinLength
 import com.inlacou.exinput.free.FreeInput
-import com.inlacou.exinput.utils.extensions.checkNotEmpty
-import kotlin.math.max
 
 /**
  * Created by inlacou on 14/06/17.
