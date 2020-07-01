@@ -3,6 +3,7 @@ package com.inlacou.exinput.free.spinner
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.MotionEvent
 import com.inlacou.exinput.free.FreeInput
 
 /**
@@ -17,17 +18,16 @@ abstract class SpinnerInput : FreeInput {
 	 * Actual text value
 	 */
 	override var text: String
-		set(value) {
-			setText(value)
-		}
-		get() {
-			return getText().toString()
-		}
+		set(value) { setText(value) }
+		get() { return getText().toString() }
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
 		tag = keyListener
 		keyListener = null
+		setOnClickListener {
+			openInput()
+		}
 	}
 
 	override fun onDetachedFromWindow() {
