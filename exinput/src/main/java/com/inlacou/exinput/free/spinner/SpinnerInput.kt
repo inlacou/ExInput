@@ -3,11 +3,11 @@ package com.inlacou.exinput.free.spinner
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.view.MotionEvent
+import android.widget.ListAdapter
 import com.inlacou.exinput.free.FreeInput
 
 /**
- * Created by inlacou on 14/06/17.
+ * Created by inlacou on 30/06/20.
  */
 abstract class SpinnerInput : FreeInput {
 	constructor(context: Context) : super(context)
@@ -20,6 +20,8 @@ abstract class SpinnerInput : FreeInput {
 	override var text: String
 		set(value) { setText(value) }
 		get() { return getText().toString() }
+
+	var adapter: ListAdapter? = null
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
