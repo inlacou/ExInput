@@ -30,7 +30,7 @@ open class DialogSpinnerInput : SpinnerInput {
 		}*/
 
 		builderSingle.setAdapter(adapter) { dialog, which ->
-			text = adapter?.getItem(which)?.toString() ?: ""
+			onItemSelected(which)
 		}
 		dialog = builderSingle.show()
 	}

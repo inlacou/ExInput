@@ -22,6 +22,7 @@ abstract class SpinnerInput : FreeInput {
 		get() { return getText().toString() }
 
 	var adapter: ListAdapter? = null
+	var onItemSelectedListener: ((Any?, Int) -> Unit)? = null
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
@@ -40,6 +41,11 @@ abstract class SpinnerInput : FreeInput {
 	override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
 		super.onFocusChanged(focused, direction, previouslyFocusedRect)
 		if(focused) { openInput() }
+	}
+
+	protected fun onItemSelected(index: Int) {
+		text = adapter?.getItem(index)?.toString() ?: ""
+		onItemSelectedListener?.invoke(adapter?.getItem(index), index)
 	}
 
 	abstract fun openInput()
