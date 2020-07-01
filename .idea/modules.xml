@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ExInput.iml" filepath="$PROJECT_DIR$/.idea/ExInput.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/exinput/exinput.iml" filepath="$PROJECT_DIR$/exinput/exinput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ExInput.iml" filepath="$PROJECT_DIR$/.idea/ExInput.iml" group="ExInput" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ExInput/app" />
+      <module fileurl="file://$PROJECT_DIR$/exinput/exinput.iml" filepath="$PROJECT_DIR$/exinput/exinput.iml" group="ExInput/exinput" />
     </modules>
   </component>
 </project>

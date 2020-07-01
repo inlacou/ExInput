@@ -10,6 +10,7 @@ import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.datetime.TimeInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
+import com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
 import com.inlacou.exinput.free.text.TextInput
 import com.inlacou.exinput.free.text.email.EmailInput
 import com.inlacou.exinput.free.text.password.PasswordInput
@@ -19,7 +20,6 @@ import com.inlacou.exinput.free.trigger.TriggerInput
 import com.inlacou.exinput.rx.drawableClicks
 import com.inlacou.exinput.rx.filterRapidClicks
 import com.inlacou.exinput.rx.textChanges
-import com.inlacou.exinput.utils.extensions.checkNotEmpty
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 	var phone: PhoneInput? = null
 	var etOnlyEditableThroughDrawables: PhoneInput? = null
 	var etTrigger: TriggerInput? = null
+	var eiSpinnerDialog: DialogSpinnerInput? = null
 
 	var button: Button? = null
 	var buttonThrow: Button? = null
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 			}
 		})
 		etOnlyEditableThroughDrawables?.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-			Toast.makeText(this@MainActivity, when(it){
+			Toast.makeText(this@MainActivity, when(it) {
 				RIGHT -> { etOnlyEditableThroughDrawables?.text = "add"; "add" }
 				LEFT -> { etOnlyEditableThroughDrawables?.text = "substract"; "substract" }
 			}, Toast.LENGTH_SHORT).show()
