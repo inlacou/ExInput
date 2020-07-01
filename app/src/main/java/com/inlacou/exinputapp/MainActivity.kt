@@ -1,6 +1,7 @@
 package com.inlacou.exinputapp
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 		phone = findViewById(R.id.phone)
 		etOnlyEditableThroughDrawables = findViewById(R.id.et_only_editable_through_drawables)
 		etTrigger = findViewById(R.id.et_trigger)
+		eiSpinnerDialog = findViewById(R.id.ei_spinner_dialog)
 
 		button = findViewById(R.id.validate)
 
@@ -100,6 +102,14 @@ class MainActivity : AppCompatActivity() {
 			}catch (ie: InvalidException){
 				Toast.makeText(this, ie.message, Toast.LENGTH_LONG).show()
 			}
+		}
+
+		eiSpinnerDialog?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
+			add("Hardik")
+			add("Archit")
+			add("Jignesh")
+			add("Umang")
+			add("Gatti")
 		}
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
