@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 			password?.isValid()
 			email?.isValid()
 			phone?.isValid()
+			eiSpinnerDialog?.isValid()
 		}
 
 		buttonThrow = findViewById(R.id.validate_throw)
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
 				password?.isValidThrowExceptions()
 				email?.isValidThrowExceptions()
 				phone?.isValidThrowExceptions()
+				eiSpinnerDialog?.isValidThrowExceptions()
 			}catch (ie: InvalidException){
 				Toast.makeText(this, ie.message, Toast.LENGTH_LONG).show()
 			}
