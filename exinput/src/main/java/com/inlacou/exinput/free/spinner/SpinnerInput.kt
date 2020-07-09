@@ -22,7 +22,9 @@ abstract class SpinnerInput : FreeInput {
 		get() { return getText().toString() }
 
 	var adapter: ListAdapter? = null
-	var onItemSelectedListener: ((Any?, Int) -> Unit)? = null
+	var onItemSelectedListener: OnItemSelectedListener? = null
+	var onItemSelectedCallback: ((SpinnerInput, Any?, Int) -> Unit)? = null
+	var onNothingSelectedCallback: ((SpinnerInput) -> Unit)? = null
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
@@ -45,10 +47,21 @@ abstract class SpinnerInput : FreeInput {
 
 	protected fun onItemSelected(index: Int) {
 		text = adapter?.getItem(index)?.toString() ?: ""
-		onItemSelectedListener?.invoke(adapter?.getItem(index), index)
+		onItemSelectedCallback?.invoke(this, adapter?.getItem(index), index)
+		onItemSelectedListener?.onItemSelected(this, adapter?.getItem(index), index)
+	}
+
+	protected fun onNothingSelected() {
+		onNothingSelectedCallback?.invoke(this)
+		onItemSelectedListener?.onNothingSelected(this)
 	}
 
 	abstract fun openInput()
 	abstract fun closeInput()
+
+	interface OnItemSelectedListener {
+		fun onItemSelected(parent: SpinnerInput, item: Any?, position: Int)
+		fun onNothingSelected(parent: SpinnerInput)
+	}
 
 }

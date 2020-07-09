@@ -32,6 +32,9 @@ open class DialogSpinnerInput : SpinnerInput {
 		builderSingle.setAdapter(adapter) { dialog, which ->
 			onItemSelected(which)
 		}
+		builderSingle.setOnCancelListener {
+			onNothingSelected()
+		}
 		dialog = builderSingle.show()
 	}
 
