@@ -12,7 +12,7 @@ import com.inlacou.exinput.free.datetime.TimeInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
 import com.inlacou.exinput.free.spinner.dialog.list.DialogListSpinnerInput
-import com.inlacou.exinput.free.spinner.dialog.numberpicker.DialogNumberPickerSpinnerInput
+import com.inlacou.exinput.free.spinner.dialog.roulette.DialogRouletteSpinnerInput
 import com.inlacou.exinput.free.text.TextInput
 import com.inlacou.exinput.free.text.email.EmailInput
 import com.inlacou.exinput.free.text.password.PasswordInput
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
 	var etOnlyEditableThroughDrawables: PhoneInput? = null
 	var etTrigger: TriggerInput? = null
 	var eiSpinnerDialogList: DialogListSpinnerInput? = null
-	var eiSpinnerDialogNumberPicker: DialogNumberPickerSpinnerInput? = null
-	var eiSpinnerDialogNumberPickerDiscontinued: DialogNumberPickerSpinnerInput? = null
+	var eiSpinnerDialogNumber: DialogRouletteSpinnerInput? = null
+	var eiSpinnerDialogNumberDiscontinued: DialogRouletteSpinnerInput? = null
 
 	var button: Button? = null
 	var buttonThrow: Button? = null
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
 		etOnlyEditableThroughDrawables = findViewById(R.id.et_only_editable_through_drawables)
 		etTrigger = findViewById(R.id.et_trigger)
 		eiSpinnerDialogList = findViewById(R.id.ei_spinner_dialog_list)
-		eiSpinnerDialogNumberPicker = findViewById(R.id.ei_spinner_dialog_number_picker)
-		eiSpinnerDialogNumberPickerDiscontinued = findViewById(R.id.ei_spinner_dialog_number_picker_discontinued)
+		eiSpinnerDialogNumber = findViewById(R.id.ei_spinner_dialog_number_picker)
+		eiSpinnerDialogNumberDiscontinued = findViewById(R.id.ei_spinner_dialog_number_picker_discontinued)
 
 		button = findViewById(R.id.validate)
 
@@ -88,8 +88,8 @@ class MainActivity : AppCompatActivity() {
 			email?.isValid()
 			phone?.isValid()
 			eiSpinnerDialogList?.isValid()
-			eiSpinnerDialogNumberPicker?.isValid()
-			eiSpinnerDialogNumberPickerDiscontinued?.isValid()
+			eiSpinnerDialogNumber?.isValid()
+			eiSpinnerDialogNumberDiscontinued?.isValid()
 		}
 
 		buttonThrow = findViewById(R.id.validate_throw)
@@ -108,8 +108,8 @@ class MainActivity : AppCompatActivity() {
 				email?.isValidThrowExceptions()
 				phone?.isValidThrowExceptions()
 				eiSpinnerDialogList?.isValidThrowExceptions()
-				eiSpinnerDialogNumberPicker?.isValidThrowExceptions()
-				eiSpinnerDialogNumberPickerDiscontinued?.isValidThrowExceptions()
+				eiSpinnerDialogNumber?.isValidThrowExceptions()
+				eiSpinnerDialogNumberDiscontinued?.isValidThrowExceptions()
 			}catch (ie: InvalidException){
 				Toast.makeText(this, ie.message, Toast.LENGTH_LONG).show()
 			}
@@ -123,11 +123,11 @@ class MainActivity : AppCompatActivity() {
 			add("Gatti")
 		}
 
-		eiSpinnerDialogNumberPicker?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
+		eiSpinnerDialogNumber?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
 			(0 until 60).forEach { add(it.toString()) }
 		}
 
-		eiSpinnerDialogNumberPickerDiscontinued?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
+		eiSpinnerDialogNumberDiscontinued?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
 			(0 until 20).forEach { add((it*5).toString()) }
 		}
 

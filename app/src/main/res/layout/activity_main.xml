@@ -236,7 +236,7 @@
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
-			<com.inlacou.exinput.free.spinner.dialog.numberpicker.DialogNumberPickerSpinnerInput
+			<com.inlacou.exinput.free.spinner.dialog.roulette.DialogRouletteSpinnerInput
 					android:id="@+id/ei_spinner_dialog_number_picker"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
-			<com.inlacou.exinput.free.spinner.dialog.numberpicker.DialogNumberPickerSpinnerInput
+			<com.inlacou.exinput.free.spinner.dialog.roulette.DialogRouletteSpinnerInput
 					android:id="@+id/ei_spinner_dialog_number_picker_discontinued"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

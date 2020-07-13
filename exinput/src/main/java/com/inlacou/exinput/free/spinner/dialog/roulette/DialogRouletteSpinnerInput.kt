@@ -1,20 +1,20 @@
-package com.inlacou.exinput.free.spinner.dialog.numberpicker
+package com.inlacou.exinput.free.spinner.dialog.roulette
 
 import android.app.AlertDialog
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.NumberPicker
 import com.inlacou.exinput.free.spinner.SpinnerInput
+import com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
 
 /**
  * Created by inlacou on 14/06/17.
  */
-open class DialogNumberPickerSpinnerInput : SpinnerInput {
+open class DialogRouletteSpinnerInput : DialogSpinnerInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
-	private var dialog: AlertDialog? = null
 	private var currentTemporalSelection = 0
 
 	override fun closeInput() {
@@ -24,7 +24,7 @@ open class DialogNumberPickerSpinnerInput : SpinnerInput {
 
 	override fun openInput() {
 		dialog = AlertDialog.Builder(context).apply {
-			setPositiveButton("Accept") { dialog, which ->
+			setPositiveButton(acceptButtonText) { dialog, which ->
 				if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
 				else onItemSelected(currentTemporalSelection)
 				dialog.dismiss()

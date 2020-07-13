@@ -31,5 +31,6 @@
 	<string name="expinput_Variable_minutes">%1$d minutos</string>
 	<string name="expinput_Variable_seconds">%1$d segundos</string>
 	<string name="expinput_Variable_milliseconds">%1$d milisegundos</string>
-	<!-- /TimeUtils -->
+    <string name="exinput_accept_button_text">Accept</string>
+    <!-- /TimeUtils -->
 </resources>
