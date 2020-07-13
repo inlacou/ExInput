@@ -222,13 +222,41 @@
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
 				android:theme="@style/exinput_textInputLayout">
-			<com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
-					android:id="@+id/ei_spinner_dialog"
+			<com.inlacou.exinput.free.spinner.dialog.list.DialogListSpinnerInput
+					android:id="@+id/ei_spinner_dialog_list"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
 					app:required="true"
 					android:hint="spinner- dialog"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.spinner.dialog.numberpicker.DialogNumberPickerSpinnerInput
+					android:id="@+id/ei_spinner_dialog_number_picker"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					app:required="true"
+					android:hint="spinner- dialog - numbers"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.spinner.dialog.numberpicker.DialogNumberPickerSpinnerInput
+					android:id="@+id/ei_spinner_dialog_number_picker_discontinued"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					app:required="true"
+					android:hint="spinner- dialog - numbers - discontinued"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button

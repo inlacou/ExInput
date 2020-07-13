@@ -1,4 +1,4 @@
-package com.inlacou.exinput.free.spinner.dialog
+package com.inlacou.exinput.free.spinner.dialog.list
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,7 +8,7 @@ import com.inlacou.exinput.free.spinner.SpinnerInput
 /**
  * Created by inlacou on 14/06/17.
  */
-open class DialogSpinnerInput : SpinnerInput {
+open class DialogListSpinnerInput : SpinnerInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
