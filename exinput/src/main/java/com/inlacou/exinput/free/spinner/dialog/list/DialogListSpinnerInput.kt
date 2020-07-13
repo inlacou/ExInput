@@ -14,6 +14,7 @@ open class DialogListSpinnerInput : SpinnerInput {
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
 	private var dialog: AlertDialog? = null
+	private var currentTemporalSelection = 0
 
 	override fun closeInput() {
 		dialog?.dismiss()
@@ -24,12 +25,14 @@ open class DialogListSpinnerInput : SpinnerInput {
 		val builderSingle: AlertDialog.Builder = AlertDialog.Builder(context)
 		//builderSingle.setIcon(R.drawable.ic_launcher)
 		//builderSingle.setTitle("Select One Name:")
-		builderSingle.setAdapter(adapter) { dialog, which ->
-			onItemSelected(which)
+		/*setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }*/
+		builderSingle.setPositiveButton("Accept") { dialog, which ->
+			if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
+			else onItemSelected(currentTemporalSelection)
+			dialog.dismiss()
 		}
-		builderSingle.setOnCancelListener {
-			onNothingSelected()
-		}
+		builderSingle.setSingleChoiceItems(adapter, currentSelectionPosition) { dialog, which -> currentTemporalSelection = which }
+		builderSingle.setOnCancelListener { onNothingSelected() }
 		dialog = builderSingle.show()
 	}
 
