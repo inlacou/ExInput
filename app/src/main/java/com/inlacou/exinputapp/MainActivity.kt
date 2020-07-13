@@ -166,8 +166,5 @@ class MainActivity : AppCompatActivity() {
 		etTrigger?.onWork = {
 			Toast.makeText(this, "Put here your own action to change value!", Toast.LENGTH_LONG).show()
 		}
-		eiSpinnerDialogList?.onItemSelectedCallback = { view, item, index ->
-			Toast.makeText(this, "selected item on position $index", Toast.LENGTH_LONG).show()
-		}
 	}
 }

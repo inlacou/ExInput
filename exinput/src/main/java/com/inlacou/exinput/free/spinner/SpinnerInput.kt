@@ -21,6 +21,7 @@ abstract class SpinnerInput : FreeInput {
 		set(value) { setText(value) }
 		get() { return getText().toString() }
 
+	var currentSelectionPosition = 0
 	var adapter: ListAdapter? = null
 	var onItemSelectedListener: OnItemSelectedListener? = null
 	var onItemSelectedCallback: ((SpinnerInput, Any?, Int) -> Unit)? = null
@@ -46,6 +47,7 @@ abstract class SpinnerInput : FreeInput {
 	}
 
 	protected fun onItemSelected(index: Int) {
+		currentSelectionPosition = index
 		text = adapter?.getItem(index)?.toString() ?: ""
 		onItemSelectedCallback?.invoke(this, adapter?.getItem(index), index)
 		onItemSelectedListener?.onItemSelected(this, adapter?.getItem(index), index)

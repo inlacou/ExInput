@@ -24,11 +24,6 @@ open class DialogListSpinnerInput : SpinnerInput {
 		val builderSingle: AlertDialog.Builder = AlertDialog.Builder(context)
 		//builderSingle.setIcon(R.drawable.ic_launcher)
 		//builderSingle.setTitle("Select One Name:")
-
-		/*builderSingle.setNegativeButton("cancel") { dialog, which ->
-			dialog.dismiss()
-		}*/
-
 		builderSingle.setAdapter(adapter) { dialog, which ->
 			onItemSelected(which)
 		}

@@ -16,6 +16,8 @@ open class DialogNumberPickerSpinnerInput : SpinnerInput {
 
 	private var dialog: AlertDialog? = null
 
+	private var currentTemporalSelection = 0
+
 	override fun closeInput() {
 		dialog?.dismiss()
 		dialog = null
@@ -23,6 +25,14 @@ open class DialogNumberPickerSpinnerInput : SpinnerInput {
 
 	override fun openInput() {
 		dialog = AlertDialog.Builder(context).apply {
+			setPositiveButton("Accept") { dialog, which ->
+				if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
+				else onItemSelected(currentTemporalSelection)
+				dialog.dismiss()
+			}
+			/*setNegativeButton("Cancel") { dialog, which ->
+                dialog.dismiss()
+            }*/
 			setView(NumberPicker(context).apply {
 				adapter?.let {
 					val strings = Array(it.count) { "" }
@@ -32,8 +42,10 @@ open class DialogNumberPickerSpinnerInput : SpinnerInput {
 					maxValue = it.count-1
 				}
 				setOnValueChangedListener { picker, oldVal, newVal ->
-					onItemSelected(newVal)
+					currentTemporalSelection = newVal
 				}
+				currentTemporalSelection = currentSelectionPosition
+				this.value = currentSelectionPosition
 			})
 			setOnCancelListener {
 				onNothingSelected()
