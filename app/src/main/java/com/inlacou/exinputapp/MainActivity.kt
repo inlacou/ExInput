@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
 			}
 		}
 
+		eiSpinnerDialogList?.directSelection = true
 		eiSpinnerDialogList?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
 			add("Hardik")
 			add("Archit")

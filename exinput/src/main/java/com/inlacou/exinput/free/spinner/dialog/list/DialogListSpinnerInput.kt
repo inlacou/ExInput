@@ -14,7 +14,8 @@ open class DialogListSpinnerInput : DialogSpinnerInput {
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
-	private var currentTemporalSelection = 0
+	private var currentTemporalSelection = -1
+	var directSelection = false
 
 	override fun closeInput() {
 		dialog?.dismiss()
@@ -26,14 +27,21 @@ open class DialogListSpinnerInput : DialogSpinnerInput {
 		//builderSingle.setIcon(R.drawable.ic_launcher)
 		//builderSingle.setTitle("Select One Name:")
 		/*setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }*/
-		builderSingle.setPositiveButton(acceptButtonText) { dialog, which ->
-			if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
-			else onItemSelected(currentTemporalSelection)
-			dialog.dismiss()
+		if(!directSelection) builderSingle.setPositiveButton(acceptButtonText) { dialog, which ->
+			onSelected()
 		}
-		builderSingle.setSingleChoiceItems(adapter, currentSelectionPosition) { dialog, which -> currentTemporalSelection = which }
+		builderSingle.setSingleChoiceItems(adapter, currentSelectionPosition ?: -1) { dialog, which ->
+			currentTemporalSelection = which
+			if(directSelection) onSelected()
+		}
 		builderSingle.setOnCancelListener { onNothingSelected() }
 		dialog = builderSingle.show()
+	}
+
+	private fun onSelected() {
+		if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
+		else onItemSelected(currentTemporalSelection)
+		dialog?.dismiss()
 	}
 
 }

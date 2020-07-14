@@ -25,9 +25,7 @@ open class DialogRouletteSpinnerInput : DialogSpinnerInput {
 	override fun openInput() {
 		dialog = AlertDialog.Builder(context).apply {
 			setPositiveButton(acceptButtonText) { dialog, which ->
-				if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
-				else onItemSelected(currentTemporalSelection)
-				dialog.dismiss()
+				onSelected()
 			}
 			/*setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }*/
 			setView(NumberPicker(context).apply {
@@ -38,12 +36,20 @@ open class DialogRouletteSpinnerInput : DialogSpinnerInput {
 					minValue = 0
 					maxValue = it.count-1
 				}
-				setOnValueChangedListener { picker, oldVal, newVal -> currentTemporalSelection = newVal }
-				currentTemporalSelection = currentSelectionPosition
-				this.value = currentSelectionPosition
+				setOnValueChangedListener { picker, oldVal, newVal ->
+					currentTemporalSelection = newVal
+				}
+				currentTemporalSelection = currentSelectionPosition ?: 0
+				this.value = currentSelectionPosition ?: 0
 			})
 			setOnCancelListener { onNothingSelected() }
 		}.show()
+	}
+
+	private fun onSelected() {
+		if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
+		else onItemSelected(currentTemporalSelection)
+		dialog?.dismiss()
 	}
 
 }
