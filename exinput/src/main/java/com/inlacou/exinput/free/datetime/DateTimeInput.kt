@@ -53,6 +53,20 @@ open class DateTimeInput : BaseInput {
 		isLongClickable = false
 	}
 
+	fun setText(calendar: Calendar?) {
+		calendar.let {
+			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
+			else    setText("")
+		}
+	}
+
+	fun setTextAsTimeMillis(millis: Long) {
+		Calendar.getInstance().apply { timeInMillis = millis }.let {
+			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
+			else    setText("")
+		}
+	}
+
 	override fun readAttrs(attrs: AttributeSet) {
 		super.readAttrs(attrs)
 		val ta = context.obtainStyledAttributes(attrs, R.styleable.DateTimeInput, 0, 0)
@@ -126,10 +140,7 @@ open class DateTimeInput : BaseInput {
 	}
 
 	protected open fun update(){
-		value.let {
-			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
-			else    setText("")
-		}
+		setText(value)
 	}
 
 }
