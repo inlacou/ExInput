@@ -54,17 +54,11 @@ open class DateTimeInput : BaseInput {
 	}
 
 	fun setText(calendar: Calendar?) {
-		calendar.let {
-			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
-			else    setText("")
-		}
+		value = calendar
 	}
 
 	fun setTextAsTimeMillis(millis: Long) {
-		Calendar.getInstance().apply { timeInMillis = millis }.let {
-			if(it!=null)    setText(ExInputConfig.toDateTime.invoke(it))
-			else    setText("")
-		}
+		value = Calendar.getInstance().apply { timeInMillis = millis }
 	}
 
 	override fun readAttrs(attrs: AttributeSet) {
