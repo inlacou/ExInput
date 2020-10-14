@@ -82,11 +82,11 @@ open class DateTimeInput : BaseInput {
 	}
 
 	@SuppressLint("CheckResult")
-	protected fun hideKeyboard(){
+	protected fun hideKeyboard() {
 		Handler().postDelayed( { context.hideKeyboard(this) } , 100)
 	}
 
-	protected fun showDateDialog(onSet: (() -> Unit)? = null){
+	protected fun showDateDialog(onSet: (() -> Unit)? = null) {
 		val now = Calendar.getInstance()
 		val dialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
 			val newValue = (value ?: Calendar.getInstance())
@@ -108,7 +108,7 @@ open class DateTimeInput : BaseInput {
 		dialog.show()
 	}
 
-	protected fun showTimeDialog(onSet: (() -> Unit)? = null){
+	protected fun showTimeDialog(onSet: (() -> Unit)? = null) {
 		val now = Calendar.getInstance()
 		val dialog = TimePickerDialog(context, TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 			val newValue = (value ?: Calendar.getInstance())
@@ -126,15 +126,18 @@ open class DateTimeInput : BaseInput {
 		dialog.show()
 	}
 
-	protected open fun work(){
+	protected open fun work() {
 		hideKeyboard()
 		showDateDialog {
 			showTimeDialog()
 		}
 	}
 
-	protected open fun update(){
-		setText(value)
+	protected open fun update() {
+		value.let {
+			if(it==null) setText("")
+			else setText(ExInputConfig.toDateTime.invoke(it))
+		}
 	}
 
 }
