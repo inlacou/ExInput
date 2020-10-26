@@ -7,6 +7,14 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.CheckBox
+import android.widget.TextView
+import com.inlacou.exinput.free.datetime.DateInput
+import com.inlacou.exinput.rx.CheckBoxObs
+import com.inlacou.exinput.rx.OnClickObs
+import com.inlacou.exinput.rx.input.DateTimeInputObs
+import com.inlacou.exinput.rx.input.TextChangeObs
+import io.reactivex.rxjava3.core.Observable
 import timber.log.Timber
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -139,4 +147,22 @@ fun Context.hideKeyboard(view: View){
 	val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 	imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
+
+/* UI */
+fun View.clicks(): Observable<View> {
+	return Observable.create(OnClickObs(this))
+}
+
+fun TextView.textChanges(): Observable<String> {
+	return Observable.create(TextChangeObs(this))
+}
+
+fun DateInput.textChanges(): Observable<DateTimeInputObs.Item> {
+	return Observable.create(DateTimeInputObs(this))
+}
+
+fun CheckBox.checkedChanges(): Observable<Boolean> {
+	return Observable.create(CheckBoxObs(this))
+}
+/* /UI */
 

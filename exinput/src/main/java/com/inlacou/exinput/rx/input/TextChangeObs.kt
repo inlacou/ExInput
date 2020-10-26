@@ -4,8 +4,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 
 class TextChangeObs constructor(private val view: TextView) : ObservableOnSubscribe<String> {
 

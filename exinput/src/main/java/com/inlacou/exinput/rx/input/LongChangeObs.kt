@@ -6,8 +6,8 @@ import android.widget.TextView
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
 
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 
 class LongChangeObs constructor(private val view: IntInput) : ObservableOnSubscribe<Long> {
 

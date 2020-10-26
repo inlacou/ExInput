@@ -5,8 +5,8 @@ import android.text.TextWatcher
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
 
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import java.util.*
 
 class DateTimeInputObs constructor(private val view: DateTimeInput) : ObservableOnSubscribe<DateTimeInputObs.Item> {
