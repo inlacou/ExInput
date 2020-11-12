@@ -9,6 +9,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.TextView
+import com.inlacou.exinput.BuildConfig
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.rx.CheckBoxObs
 import com.inlacou.exinput.rx.OnClickObs
@@ -22,10 +23,10 @@ import java.math.RoundingMode
 //https://es.wikipedia.org/wiki/Separador_de_millares
 fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands: Boolean = true,
                          decimalSeparator: String = ",", thousandsSeparator: String = ".",
-                         roundingMode: RoundingMode = RoundingMode.FLOOR, onDecimalsLimited: (() -> Unit)? = null): String {
+                         onDecimalsLimited: (() -> Unit)? = null, log: Boolean = BuildConfig.DEBUG): String {
 	val secret = "%&%&lñjkndfkljWEkljkjsdgrkbnldflkjnjzdgKJFELBEUEW"
-	Timber.d("formatDecimal -------------------------")
-	Timber.d("formatDecimal: $this | decimalSeparator: $decimalSeparator")
+	if(log) Timber.d("formatDecimal -------------------------")
+	if(log) Timber.d("formatDecimal: $this | decimalSeparator: $decimalSeparator")
 	if (trim().isEmpty() or trim().equals("nan", ignoreCase = true) or trim().equals("null", ignoreCase = true)) {
 		return this
 	}
@@ -43,18 +44,16 @@ fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands
 	curated = curated.replace(".", "")
 	curated = curated.replace(",", "")
 	curated = curated.replace(secret, ".")
-	Timber.d("formatDecimal | curated: $curated")
+	if(log) Timber.d("formatDecimal | curated: $curated")
+	if(curated==".") return "0$decimalSeparator"
 
-	var bd = BigDecimal(curated)
-	bd = bd.setScale(maxDecimals, roundingMode)
-	val value = bd.toString().replace(".", decimalSeparator)
-	Timber.d("formatDecimal | value: $curated")
-
-	val separatorPosition = value.lastIndexOf(decimalSeparator)
+	val separatorPosition = curated.lastIndexOf(".")
+	if(log) Timber.d("formatDecimal | separatorPosition: $separatorPosition")
 
 	try {
 		//Integer part
-		var integerPart = (value.substring(0, if (separatorPosition == -1) value.length else separatorPosition))
+		var integerPart = (curated.substring(0, if (separatorPosition == -1) curated.length else separatorPosition))
+		if(log) Timber.d("formatDecimal | integerPart: $integerPart")
 		//Decimal part
 		var decimalPart = when {
 			separatorPosition == -1 -> null
@@ -67,8 +66,9 @@ fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands
 					else curated.length)
 			else -> ""
 		}
+		if(log) Timber.d("formatDecimal | decimalPart: $decimalPart")
 
-		if(force){
+		if(force) {
 			if(decimalPart==null){
 				decimalPart = ""
 			}
@@ -76,6 +76,7 @@ fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands
 				decimalPart += "0"
 			}
 		}
+		if(log) Timber.d("formatDecimal | decimalPart: $decimalPart")
 
 		val newThousandsSeparator = if(thousandsSeparator!=decimalSeparator){
 			thousandsSeparator
@@ -97,23 +98,21 @@ fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands
 			}
 		}
 
-		Timber.d("formatDecimal | force: $force" +
-				" | !contains(decimalSeparator): ${!contains(decimalSeparator)}" +
-				" | maxDecimals: $maxDecimals" +
-				" | integerPart: $integerPart | decimalPart: $decimalPart")
+		if(log) Timber.d("formatDecimal | force: '$force'" +
+				" | !contains(decimalSeparator): '${!contains(decimalSeparator)}'" +
+				" | sign: '$sign'" +
+				" | decimalSeparator: '$decimalSeparator'" +
+				" | maxDecimals: '$maxDecimals'" +
+				" | integerPart: '$integerPart' | decimalPart: '$decimalPart'")
 		return when {
 			force && decimalPart!="" -> sign + integerPart + decimalSeparator + decimalPart
 			force && maxDecimals==0 -> sign + integerPart
 			!contains(decimalSeparator) || maxDecimals == 0 -> sign + integerPart
 			decimalPart == "" -> sign + integerPart + decimalSeparator
 			else -> sign + integerPart + decimalSeparator + decimalPart
+		}.also {
+			if(log) Timber.d("formatDecimal | returning: $it")
 		}
-		/*
-		return if (force) value
-		else if (!contains(decimalSeparator) || maxDecimals == 0) integerPart.toString()
-		else if (decimalPart == "") integerPart.toString() + decimalSeparator
-		else integerPart.toString() + decimalSeparator + decimalPart
-		*/
 	}catch (nfe: NumberFormatException){
 		return ""
 	}
