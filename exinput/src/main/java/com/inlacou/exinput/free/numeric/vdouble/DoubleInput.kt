@@ -24,6 +24,7 @@ open class DoubleInput : NumberInput {
 	var maxDecimals: Int = 2
 
 	override var text: String
+		@Deprecated("Use float(set), double(set), setFloat, or setDouble instead, as text(set) and setText are ambiguous when decimal and thousand separators can be redefined")
 		set(value) {
 			setText(value.formatDecimal(
 					maxDecimals = maxDecimals,
@@ -34,6 +35,38 @@ open class DoubleInput : NumberInput {
 		get() {
 			return getText().toString().replace("", "").replace(",", "")
 		}
+	var double: Double
+		get() = text.toDouble()
+		set(value) {
+			setText(value.toString().replace(".", decimalSeparator).formatDecimal(
+				maxDecimals = maxDecimals,
+				decimalSeparator = decimalSeparator,
+				thousandsSeparator = thousandSeparator,
+				markThousands = markThousands))
+		}
+	var float: Float
+		get() = text.toFloat()
+		set(value) {
+			setText(value.toString().replace(".", decimalSeparator).formatDecimal(
+				maxDecimals = maxDecimals,
+				decimalSeparator = decimalSeparator,
+				thousandsSeparator = thousandSeparator,
+				markThousands = markThousands))
+		}
+	fun setText(double: Double) {
+		setText(double.toString().formatDecimal(
+			maxDecimals = maxDecimals,
+			decimalSeparator = decimalSeparator,
+			thousandsSeparator = thousandSeparator,
+			markThousands = markThousands))
+	}
+	fun setText(float: Float) {
+		setText(float.toString().formatDecimal(
+			maxDecimals = maxDecimals,
+			decimalSeparator = decimalSeparator,
+			thousandsSeparator = thousandSeparator,
+			markThousands = markThousands))
+	}
 
 	init {
 		keyListener = DigitsKeyListener.getInstance("0123456789,.")

@@ -18,8 +18,8 @@ abstract class NumberInput : FreeInput {
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
 	companion object {
-		const val DEFAULT_DECIMAL_SEPARATOR = ","
-		const val DEFAULT_THOUSAND_SEPARATOR = "."
+		const val DEFAULT_DECIMAL_SEPARATOR = "."
+		const val DEFAULT_THOUSAND_SEPARATOR = " "
 	}
 
 	var maxDigits: Int? = null

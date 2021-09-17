@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ExInput.iml" filepath="$PROJECT_DIR$/.idea/ExInput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExInput.iml" filepath="$PROJECT_DIR$/.idea/modules/ExInput.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ExInput.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ExInput.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.iml" filepath="$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.iml" />
     </modules>

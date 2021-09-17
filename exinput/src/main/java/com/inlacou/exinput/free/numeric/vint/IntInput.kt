@@ -17,13 +17,24 @@ open class IntInput : NumberInput {
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
 	override var text: String
+		@Deprecated("Use int(set), or setInt instead, as text(set) and setText are ambiguous when decimal and thousand separators can be redefined")
 		set(value) {
 			setText(value.formatDecimal(
 					maxDecimals = 0,
 					decimalSeparator = decimalSeparator,
 					thousandsSeparator = thousandSeparator,
-					markThousands = markThousands)) }
+					markThousands = markThousands))
+		}
 		get() { return getText().toString() }
+	var int: Int
+		get() = text.toInt()
+		set(value) {
+			setText(value.toString().formatDecimal(
+				maxDecimals = 0,
+				decimalSeparator = ".",
+				thousandsSeparator = ",",
+				markThousands = markThousands))
+		}
 
 	init {
 		keyListener = DigitsKeyListener.getInstance("0123456789")

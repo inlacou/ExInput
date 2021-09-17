@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+			Toast.makeText(this, "new text on 'text' field: $it", Toast.LENGTH_SHORT).show()
 		}
 		etOnlyEditableThroughDrawables?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
 			override fun onDrawableClick(touchTarget: TouchTarget) {

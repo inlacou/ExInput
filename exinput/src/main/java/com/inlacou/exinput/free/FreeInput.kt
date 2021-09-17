@@ -39,23 +39,19 @@ abstract class FreeInput: BaseInput {
 				newText = initialText
 				onTextChanged(s)
 			}
-
-			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-			}
-
-			override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-			}
+			override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+			override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 		})
 	}
 
-	open fun onTextChanged(s: Editable?){
+	open fun onTextChanged(s: Editable?) {
 		if(newText==initialText) { //If non-transitory, acceptable value
 			previousText = initialText //We save it
-			Timber.d("afterTextChanged | saved previousText: $previousText")
+			Timber.d("afterTextChanged | same | saved previous text: $previousText")
 		}
 		if(newText!=initialText) { //If different than current
-			Timber.d("afterTextChanged | different test | write it: $newText")
-			text = newText //Write it
+			Timber.d("afterTextChanged | different | write it: $newText")
+			super.text = newText //Write it
 			setSelection(newText.length) //Move selection to end
 		}
 	}
