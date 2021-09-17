@@ -35,37 +35,49 @@ open class DoubleInput : NumberInput {
 		get() {
 			return getText().toString().replace("", "").replace(",", "")
 		}
-	var double: Double
-		get() = text.toDouble()
+	var double: Double?
+		get() = text.toDoubleOrNull()
 		set(value) {
-			setText(value.toString().replace(".", decimalSeparator).formatDecimal(
+			if(value==null) setText("")
+			else {
+				setText(value.toString().replace(".", decimalSeparator).formatDecimal(
+					maxDecimals = maxDecimals,
+					decimalSeparator = decimalSeparator,
+					thousandsSeparator = thousandSeparator,
+					markThousands = markThousands))
+			}
+		}
+	var float: Float?
+		get() = text.toFloatOrNull()
+		set(value) {
+			if(value==null) setText("")
+			else {
+				setText(value.toString().replace(".", decimalSeparator).formatDecimal(
+					maxDecimals = maxDecimals,
+					decimalSeparator = decimalSeparator,
+					thousandsSeparator = thousandSeparator,
+					markThousands = markThousands))
+			}
+		}
+	fun setText(double: Double?) {
+		if(double==null) setText("")
+		else {
+			setText(double.toString().replace(".", decimalSeparator).formatDecimal(
 				maxDecimals = maxDecimals,
 				decimalSeparator = decimalSeparator,
 				thousandsSeparator = thousandSeparator,
 				markThousands = markThousands))
 		}
-	var float: Float
-		get() = text.toFloat()
-		set(value) {
-			setText(value.toString().replace(".", decimalSeparator).formatDecimal(
-				maxDecimals = maxDecimals,
-				decimalSeparator = decimalSeparator,
-				thousandsSeparator = thousandSeparator,
-				markThousands = markThousands))
-		}
-	fun setText(double: Double) {
-		setText(double.toString().formatDecimal(
-			maxDecimals = maxDecimals,
-			decimalSeparator = decimalSeparator,
-			thousandsSeparator = thousandSeparator,
-			markThousands = markThousands))
 	}
-	fun setText(float: Float) {
-		setText(float.toString().formatDecimal(
-			maxDecimals = maxDecimals,
-			decimalSeparator = decimalSeparator,
-			thousandsSeparator = thousandSeparator,
-			markThousands = markThousands))
+	fun setText(float: Float?) {
+		if(float==null) setText("")
+		else {
+			setText(float.toString().replace(".", decimalSeparator).formatDecimal(
+				maxDecimals = maxDecimals,
+				decimalSeparator = decimalSeparator,
+				thousandsSeparator = thousandSeparator,
+				markThousands = markThousands))
+		}
 	}
 
 	init {

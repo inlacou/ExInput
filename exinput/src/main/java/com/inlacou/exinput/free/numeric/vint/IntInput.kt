@@ -26,15 +26,28 @@ open class IntInput : NumberInput {
 					markThousands = markThousands))
 		}
 		get() { return getText().toString() }
-	var int: Int
-		get() = text.toInt()
+	var int: Int?
+		get() = text.toIntOrNull()
 		set(value) {
-			setText(value.toString().formatDecimal(
+			if(value==null) setText("")
+			else {
+				setText(value.toString().formatDecimal(
+						maxDecimals = 0,
+						decimalSeparator = ".",
+						thousandsSeparator = ",",
+						markThousands = markThousands))
+			}
+		}
+	fun setText(int: Int?) {
+		if(int==null) setText("")
+		else {
+			setText(int.toString().formatDecimal(
 				maxDecimals = 0,
 				decimalSeparator = ".",
 				thousandsSeparator = ",",
 				markThousands = markThousands))
 		}
+	}
 
 	init {
 		keyListener = DigitsKeyListener.getInstance("0123456789")
