@@ -81,7 +81,7 @@ open class DoubleInput : NumberInput {
 	}
 
 	init {
-		keyListener = DigitsKeyListener.getInstance("0123456789,.")
+		keyListener = DigitsKeyListener.getInstance("-0123456789,.")
 	}
 
 	override fun readAttrs(attrs: AttributeSet) {
@@ -100,6 +100,8 @@ open class DoubleInput : NumberInput {
 	}
 
 	override fun onTextChanged(s: Editable?){
+		val minusIndex = newText.indexOf("-")
+		if(minusIndex>0) newText = newText.removeRange(minusIndex,minusIndex+1)
 		handleMaxDigits()
 		newText = newText.formatDecimal(
 				maxDecimals = maxDecimals,
