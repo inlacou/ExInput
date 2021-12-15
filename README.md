@@ -277,17 +277,17 @@ Basic way:
 ```kt
 yourTextInput?.setOnTouchListener(object : OnTextViewDrawableTouchListener(interceptAllClick = true){
 	override fun onDrawableClick(touchTarget: TouchTarget) {
-		when(it){
+		when(it) {
 			RIGHT -> { /*Clicked on right/end drawable*/ }
 			LEFT -> { /*Clicked on left/start drawable*/ }
-			}
 		}
-	})
+	}
+}
 ```
 Rx way:
 ```kt
 yourTextInput.drawableClicks()?.filterRapidClicks()?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
-	when(it){
+	when(it) {
 		RIGHT -> { /*Clicked on right/end drawable*/ }
 		LEFT -> { /*Clicked on left/start drawable*/ }
 	}
