@@ -6,7 +6,6 @@ import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import com.inlacou.exinput.utils.extensions.formatDecimal
 import com.inlacou.exinput.free.numeric.NumberInput
-import timber.log.Timber
 
 /**
  * Created by inlacou on 14/06/17.

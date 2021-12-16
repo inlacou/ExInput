@@ -5,12 +5,10 @@ import android.text.Editable
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import com.inlacou.exinput.R
-import com.inlacou.exinput.utils.extensions.digitsNum
 import com.inlacou.exinput.utils.extensions.formatDecimal
 import com.inlacou.exinput.utils.extensions.snackbar
 import com.inlacou.exinput.free.numeric.NumberInput
 import com.inlacou.exinput.utils.extensions.intergerNum
-import timber.log.Timber
 
 /**
  * Created by inlacou on 14/06/17.

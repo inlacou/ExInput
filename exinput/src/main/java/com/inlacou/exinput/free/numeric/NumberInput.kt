@@ -17,6 +17,10 @@ abstract class NumberInput : FreeInput {
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
+	init {
+		isSingleLine = true
+	}
+
 	companion object {
 		const val DEFAULT_DECIMAL_SEPARATOR = "."
 		const val DEFAULT_THOUSAND_SEPARATOR = " "
