@@ -228,7 +228,7 @@
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
 					app:required="true"
-					android:hint="spinner- dialog"/>
+					android:hint="dialog- spinner - list"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout
@@ -242,7 +242,7 @@
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
 					app:required="true"
-					android:hint="spinner- dialog - numbers"/>
+					android:hint="dialog - spinner - numbers"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout
@@ -256,7 +256,21 @@
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
 					app:required="true"
-					android:hint="spinner- dialog - numbers - alt"/>
+					android:hint="dialog - spinner - numbers - alt"/>
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:hintTextAppearance="@style/exinput_textInputLayout.hint"
+				android:theme="@style/exinput_textInputLayout">
+			<com.inlacou.exinput.free.spinner.dialog.duration.DialogDurationInput
+					android:id="@+id/ei_spinner_dialog_duration"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:theme="@style/exinput_input"
+					app:required="true"
+					android:hint="dialog - duration"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button

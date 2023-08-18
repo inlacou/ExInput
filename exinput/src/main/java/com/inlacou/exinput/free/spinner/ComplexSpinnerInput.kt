@@ -3,16 +3,18 @@ package com.inlacou.exinput.free.spinner
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.widget.ListAdapter
 import com.inlacou.exinput.free.FreeInput
 
 /**
  * Created by inlacou on 30/06/20.
  */
-abstract class SpinnerInput : FreeInput {
+abstract class ComplexSpinnerInput<Item> : FreeInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
+
+	abstract var currentSelection: Item?
+	private var currentTemporalSelection = currentSelection
 
 	/**
 	 * Actual text value
@@ -21,11 +23,10 @@ abstract class SpinnerInput : FreeInput {
 		set(value) { setText(value) }
 		get() { return getText().toString() }
 
-	var currentSelectionPosition: Int? = null
-	var adapter: ListAdapter? = null
-	var onItemSelectedListener: OnItemSelectedListener? = null
-	var onItemSelectedCallback: ((SpinnerInput, Any?, Int) -> Unit)? = null
-	var onNothingSelectedCallback: ((SpinnerInput) -> Unit)? = null
+	var onItemSelectedListener: OnItemSelectedListener<Item>? = null
+	var onItemSelectedCallback: ((ComplexSpinnerInput<Item>, Item?) -> Unit)? = null
+	var onNothingSelectedCallback: ((ComplexSpinnerInput<Item>) -> Unit)? = null
+	var itemToString: ((Item) -> String)? = null
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
@@ -46,11 +47,11 @@ abstract class SpinnerInput : FreeInput {
 		if(focused) { openInput() }
 	}
 
-	protected fun onItemSelected(index: Int) {
-		currentSelectionPosition = index
-		text = adapter?.getItem(index)?.toString() ?: ""
-		onItemSelectedCallback?.invoke(this, adapter?.getItem(index), index)
-		onItemSelectedListener?.onItemSelected(this, adapter?.getItem(index), index)
+	protected fun onItemSelected(item: Item?) {
+		currentSelection = item
+		text = item?.let { itemToString?.invoke(it) } ?: item?.toString() ?: ""
+		onItemSelectedCallback?.invoke(this, item)
+		onItemSelectedListener?.onItemSelected(this, item)
 	}
 
 	protected fun onNothingSelected() {
@@ -61,9 +62,9 @@ abstract class SpinnerInput : FreeInput {
 	abstract fun openInput()
 	abstract fun closeInput()
 
-	interface OnItemSelectedListener {
-		fun onItemSelected(parent: SpinnerInput, item: Any?, position: Int)
-		fun onNothingSelected(parent: SpinnerInput)
+	interface OnItemSelectedListener<Item> {
+		fun onItemSelected(parent: ComplexSpinnerInput<Item>, item: Any?)
+		fun onNothingSelected(parent: ComplexSpinnerInput<Item>)
 	}
 
 }

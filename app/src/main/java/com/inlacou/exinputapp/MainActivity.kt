@@ -11,6 +11,7 @@ import com.inlacou.exinput.free.datetime.DateTimeInput
 import com.inlacou.exinput.free.datetime.TimeInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
+import com.inlacou.exinput.free.spinner.dialog.duration.DialogDurationInput
 import com.inlacou.exinput.free.spinner.dialog.list.DialogListSpinnerInput
 import com.inlacou.exinput.free.spinner.dialog.roulette.DialogRouletteSpinnerInput
 import com.inlacou.exinput.free.text.TextInput
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 	var eiSpinnerDialogList: DialogListSpinnerInput? = null
 	var eiSpinnerDialogNumber: DialogRouletteSpinnerInput? = null
 	var eiSpinnerDialogNumberDiscontinued: DialogRouletteSpinnerInput? = null
+	var eiSpinnerDialogDuration: DialogDurationInput? = null
 
 	var button: Button? = null
 	var buttonThrow: Button? = null
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 		eiSpinnerDialogList = findViewById(R.id.ei_spinner_dialog_list)
 		eiSpinnerDialogNumber = findViewById(R.id.ei_spinner_dialog_number_picker)
 		eiSpinnerDialogNumberDiscontinued = findViewById(R.id.ei_spinner_dialog_number_picker_discontinued)
+		eiSpinnerDialogDuration = findViewById(R.id.ei_spinner_dialog_duration)
 
 		button = findViewById(R.id.validate)
 
@@ -130,6 +133,10 @@ class MainActivity : AppCompatActivity() {
 
 		eiSpinnerDialogNumberDiscontinued?.adapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice).apply {
 			(0 until 20).forEach { add((it*5).toString()) }
+		}
+
+		eiSpinnerDialogDuration?.itemToString = {
+			"${it.hours ?: 0}º${it.minutes ?: 0}'${it.seconds ?: 0}''"
 		}
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {

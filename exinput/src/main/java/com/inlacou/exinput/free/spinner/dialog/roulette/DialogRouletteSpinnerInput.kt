@@ -4,13 +4,12 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.NumberPicker
-import com.inlacou.exinput.free.spinner.SpinnerInput
-import com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
+import com.inlacou.exinput.free.spinner.dialog.SingleDialogSpinnerInput
 
 /**
  * Created by inlacou on 14/06/17.
  */
-open class DialogRouletteSpinnerInput : DialogSpinnerInput {
+open class DialogRouletteSpinnerInput : SingleDialogSpinnerInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
@@ -47,7 +46,7 @@ open class DialogRouletteSpinnerInput : DialogSpinnerInput {
 	}
 
 	private fun onSelected() {
-		if(currentTemporalSelection==currentSelectionPosition) onNothingSelected()
+		if (currentTemporalSelection == currentSelectionPosition) onNothingSelected()
 		else onItemSelected(currentTemporalSelection)
 		dialog?.dismiss()
 	}

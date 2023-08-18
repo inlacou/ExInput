@@ -3,13 +3,12 @@ package com.inlacou.exinput.free.spinner.dialog.list
 import android.app.AlertDialog
 import android.content.Context
 import android.util.AttributeSet
-import com.inlacou.exinput.free.spinner.SpinnerInput
-import com.inlacou.exinput.free.spinner.dialog.DialogSpinnerInput
+import com.inlacou.exinput.free.spinner.dialog.SingleDialogSpinnerInput
 
 /**
  * Created by inlacou on 14/06/17.
  */
-open class DialogListSpinnerInput : DialogSpinnerInput {
+open class DialogListSpinnerInput : SingleDialogSpinnerInput {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
@@ -23,19 +22,19 @@ open class DialogListSpinnerInput : DialogSpinnerInput {
 	}
 
 	override fun openInput() {
-		val builderSingle: AlertDialog.Builder = AlertDialog.Builder(context)
-		//builderSingle.setIcon(R.drawable.ic_launcher)
-		//builderSingle.setTitle("Select One Name:")
+		val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+		//builder.setIcon(R.drawable.ic_launcher)
+		//builder.setTitle("Select One Name:")
 		/*setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }*/
-		if(!directSelection) builderSingle.setPositiveButton(acceptButtonText) { dialog, which ->
+		if(!directSelection) builder.setPositiveButton(acceptButtonText) { dialog, which ->
 			onSelected()
 		}
-		builderSingle.setSingleChoiceItems(adapter, currentSelectionPosition ?: -1) { dialog, which ->
+		builder.setSingleChoiceItems(adapter, currentSelectionPosition ?: -1) { dialog, which ->
 			currentTemporalSelection = which
 			if(directSelection) onSelected()
 		}
-		builderSingle.setOnCancelListener { onNothingSelected() }
-		dialog = builderSingle.show()
+		builder.setOnCancelListener { onNothingSelected() }
+		dialog = builder.show()
 	}
 
 	private fun onSelected() {
