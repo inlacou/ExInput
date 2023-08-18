@@ -3,16 +3,17 @@ package com.inlacou.exinput.rx
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
-import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.free.datetime.DateTimeInput
-import com.inlacou.exinput.free.numeric.NumberInput
 import com.inlacou.exinput.free.numeric.vdouble.DoubleInput
 import com.inlacou.exinput.free.numeric.vint.IntInput
+import com.inlacou.exinput.free.spinner.dialog.duration.DialogDurationInput
 import com.inlacou.exinput.rx.input.DateTimeInputObs
 import com.inlacou.exinput.rx.input.DoubleChangeObs
+import com.inlacou.exinput.rx.input.DurationChangeObs
 import com.inlacou.exinput.rx.input.LongChangeObs
 import com.inlacou.exinput.rx.input.TextChangeObs
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
+import com.inlacou.inkkotlincommons.monads.Maybe
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
@@ -48,6 +49,10 @@ fun IntInput.textChanges(): Observable<Long> {
 
 fun DoubleInput.textChanges(): Observable<Double> {
 	return Observable.create(DoubleChangeObs(this))
+}
+
+fun DialogDurationInput.textChanges(): Observable<Maybe<DialogDurationInput.Duration>> {
+	return Observable.create(DurationChangeObs(this))
 }
 
 fun CheckBox.checkedChanges(): Observable<Boolean> {
