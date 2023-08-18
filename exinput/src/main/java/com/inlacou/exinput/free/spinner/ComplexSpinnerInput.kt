@@ -63,7 +63,7 @@ abstract class ComplexSpinnerInput<Item> : FreeInput {
 	abstract fun closeInput()
 
 	interface OnItemSelectedListener<Item> {
-		fun onItemSelected(parent: ComplexSpinnerInput<Item>, item: Any?)
+		fun onItemSelected(parent: ComplexSpinnerInput<Item>, item: Item?)
 		fun onNothingSelected(parent: ComplexSpinnerInput<Item>)
 	}
 
