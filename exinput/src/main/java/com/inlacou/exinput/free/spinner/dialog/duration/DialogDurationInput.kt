@@ -9,6 +9,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import com.inlacou.exinput.R
 import com.inlacou.exinput.free.spinner.dialog.ComplexDialogSpinnerInput
+import timber.log.Timber
 
 /**
  * Created by inlacou on 14/06/17.
@@ -18,7 +19,11 @@ open class DialogDurationInput : ComplexDialogSpinnerInput<DialogDurationInput.D
 	constructor(context: Context, attrSet: AttributeSet) : super(context, attrSet) { readAttrs(attrSet) }
 	constructor(context: Context, attrSet: AttributeSet, arg: Int) : super(context, attrSet, arg) { readAttrs(attrSet) }
 
-	data class Duration(val hours: Int? = null, val minutes: Int? = null, val seconds: Int? = null)
+	data class Duration(val hours: Int? = null, val minutes: Int? = null, val seconds: Int? = null) {
+		override fun toString(): String = "${hours}h ${minutes}m ${seconds}s"
+		fun inSeconds() = ((((hours?:0)*60+(minutes?:0))*60)+(seconds?:0))
+		fun inMillis() = inSeconds()*1000
+	}
 
 	var showMinutes: Boolean = true
 	var showSeconds: Boolean = true

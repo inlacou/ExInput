@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
 import com.inlacou.exinput.free.FreeInput
+import timber.log.Timber
 
 /**
  * Created by inlacou on 30/06/20.

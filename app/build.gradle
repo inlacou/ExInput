@@ -39,5 +39,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.1.6"                                              //RX
     implementation 'com.jakewharton.timber:timber:5.0.1'                                        //Better logging, integrated with Crashlytics
 
+    implementation "com.github.inlacou.InkCommons:InkKotlinCommons:1.3.10"
+
     implementation project(':exinput')
 }

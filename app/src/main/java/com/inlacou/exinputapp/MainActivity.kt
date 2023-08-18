@@ -26,6 +26,7 @@ import com.inlacou.exinput.rx.textChanges
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener
 import com.inlacou.exinput.utils.listeners.OnTextViewDrawableTouchListener.TouchTarget.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -136,8 +137,14 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		eiSpinnerDialogDuration?.itemToString = {
-			"${it.hours ?: 0}º${it.minutes ?: 0}'${it.seconds ?: 0}''"
+			//"${it.hours ?: 0}º${it.minutes ?: 0}'${it.seconds ?: 0}''"
+			it.inSeconds().toString()
 		}
+
+		eiSpinnerDialogDuration?.textChanges()
+			?.subscribeOn(Schedulers.computation())
+			?.observeOn(AndroidSchedulers.mainThread())
+			?.subscribe({ Toast.makeText(this, "new duration $it", Toast.LENGTH_LONG).show() },{ throw it })
 
 		text?.textChanges()?.debounce(200, TimeUnit.MILLISECONDS)?.observeOn(AndroidSchedulers.mainThread())?.subscribe {
 			Toast.makeText(this, "new text on 'text' field: $it", Toast.LENGTH_SHORT).show()
