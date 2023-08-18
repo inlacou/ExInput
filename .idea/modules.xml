@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExInput.iml" filepath="$PROJECT_DIR$/.idea/modules/ExInput.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ExInput.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ExInput.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ExInput.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ExInput.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ExInput.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ExInput.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ExInput.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ExInput.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.iml" filepath="$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.main.iml" filepath="$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/exinput/ExInput.exinput.unitTest.iml" />
     </modules>
   </component>
 </project>

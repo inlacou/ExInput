@@ -1,23 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.inlacou.exinputapp"
+        namespace "com.inlacou.exinputapp"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    android {
-        compileOptions {
-            sourceCompatibility 1.8
-            targetCompatibility 1.8
-        }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,13 +35,9 @@ dependencies {
     implementation "com.google.android.material:material:1.3.0-alpha03"                                          //Android design library
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test:runner:1.3.0' // Set this dependency to use JUnit 4
-    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
-
-    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"                                           //RX
-    implementation "io.reactivex.rxjava3:rxjava:3.0.7"                                              //RX
-    implementation 'com.jakewharton.timber:timber:4.7.1'                                        //Better logging, integrated with Crashlytics
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.2"                                           //RX
+    implementation "io.reactivex.rxjava3:rxjava:3.1.6"                                              //RX
+    implementation 'com.jakewharton.timber:timber:5.0.1'                                        //Better logging, integrated with Crashlytics
 
     implementation project(':exinput')
 }

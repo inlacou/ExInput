@@ -2,16 +2,25 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
-
+    compileSdkVersion 34
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
+        namespace 'com.inlacou.exinput'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,14 +32,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test:runner:1.3.0' // Set this dependency to use JUnit 4
-    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0' // Set this dependency to build and run UI Automator tests
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.google.android.material:material:1.3.0-alpha03"                         //https://github.com/material-components/material-components-android
-    implementation 'com.jakewharton.timber:timber:4.7.1'                                        //Better logging, integrated with Crashlytics
-    compileOnly "io.reactivex.rxjava3:rxjava:3.0.7"                                            //RX
+    implementation 'com.jakewharton.timber:timber:5.0.1'                                        //Better logging, integrated with Crashlytics
+    compileOnly "io.reactivex.rxjava3:rxjava:3.1.6"                                            //RX
 }
 repositories {
     mavenCentral()

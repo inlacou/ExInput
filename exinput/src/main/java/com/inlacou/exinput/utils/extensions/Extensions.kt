@@ -9,7 +9,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.TextView
-import com.inlacou.exinput.BuildConfig
 import com.inlacou.exinput.free.datetime.DateInput
 import com.inlacou.exinput.rx.CheckBoxObs
 import com.inlacou.exinput.rx.OnClickObs
@@ -17,13 +16,11 @@ import com.inlacou.exinput.rx.input.DateTimeInputObs
 import com.inlacou.exinput.rx.input.TextChangeObs
 import io.reactivex.rxjava3.core.Observable
 import timber.log.Timber
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 //https://es.wikipedia.org/wiki/Separador_de_millares
 fun String.formatDecimal(maxDecimals: Int, force: Boolean = false, markThousands: Boolean = true,
                          decimalSeparator: String = ",", thousandsSeparator: String = ".",
-                         onDecimalsLimited: (() -> Unit)? = null, log: Boolean = BuildConfig.DEBUG): String {
+                         onDecimalsLimited: (() -> Unit)? = null, log: Boolean = false): String {
 	val secret = "%&%&lñjkndfkljWEkljkjsdgrkbnldflkjnjzdgKJFELBEUEW"
 	if(log) Timber.d("formatDecimal -------------------------")
 	if(log) Timber.d("formatDecimal: $this | decimalSeparator: $decimalSeparator")

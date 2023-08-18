@@ -256,7 +256,7 @@
 					android:layout_height="wrap_content"
 					android:theme="@style/exinput_input"
 					app:required="true"
-					android:hint="spinner- dialog - numbers - discontinued"/>
+					android:hint="spinner- dialog - numbers - alt"/>
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button

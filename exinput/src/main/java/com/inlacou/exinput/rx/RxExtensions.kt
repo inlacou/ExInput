@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 /* Utils */
-fun <T> Observable<T>.filterRapidClicks(windowDuration: Long = 1, timeUnit: TimeUnit = TimeUnit.SECONDS) = throttleFirst(windowDuration, timeUnit)
+fun <T: Any> Observable<T>.filterRapidClicks(windowDuration: Long = 1, timeUnit: TimeUnit = TimeUnit.SECONDS) = throttleFirst(windowDuration, timeUnit)
 /* /Utils */
 
 /**
